@@ -1,4 +1,4 @@
-![LABvantage](/static/img/labvantage.png)
+![LABvantage](/static/img/labvantage.png){:height="25%" width="25%"}
 LABvantage
 ==========
 
