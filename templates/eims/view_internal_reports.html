@@ -1,0 +1,54 @@
+{% extends "base/base.html" %}
+{% block title %}VIEW INTERNAL REPORTS{% endblock %}
+{% block content %}
+            <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+        <li>
+    <a href="{% url 'view_internal_reports' %}">View Internal Reports</a>
+</li>
+
+</ul>
+    <div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><span class="break"></span>View Products</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
+					 <div class="box-content">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+								  <th>Report ID</th>
+								  <th>Year</th>
+								  <th>Status</th>
+
+							  </tr>
+						  </thead>
+                            <tbody>
+
+                            {% for report in reports %}
+                            <tr>
+                                <td><a href="{% url 'view_internal_report' report.id %}">{{ report.id }}</a></td>
+                                <td> <a href="{% url 'view_internal_report' report.id %}"> {{ report.created_at|date:'Y' }} </a> </td>
+                            <td>{{ report.get_status_display }}</td>
+
+
+                            </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                            </table>
+                         </div>
+                    </div>
+    </div>
+    
+{%endblock %}

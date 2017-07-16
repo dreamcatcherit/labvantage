@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load staticfiles %}
+<head>
+    {% block head %}{%endblock%}
+
+    <!-- start: Meta -->
+    <meta charset="utf-8">
+    <title>Labvantage Demo|{%block title%}{%endblock%}</title>
+    <meta name="description" content="Laboratory Inventory Management System">
+    <meta name="author" content="Dreamcatcher IT">
+    <meta name="keyword" content="Labvantage, Laboratory, Inventory, Management, System, Lab, Test">
+    <!-- end: Meta -->
+
+    <!-- start: Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- end: Mobile Specific -->
+
+    <!-- start: CSS -->
+    <link id="bootstrap-style" href="{%static 'css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-responsive.min.css'%}" rel="stylesheet">
+    <link id="base-style" href="{% static 'css/style.css'%}" rel="stylesheet">
+    <link id="base-style-responsive" href="{% static 'css/style-responsive.css'%}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-datetimepicker.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/mycss/main.css'%}" rel="stylesheet">
+    <link href="{% static 'css/mycss/font.css'%}" rel="stylesheet">
+    <!-- end: CSS -->
+
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<link id="ie-style" href="css/ie.css" rel="stylesheet">
+		<![endif]-->
+
+    <!--[if IE 9]>
+		<link id="ie9style" href="css/ie9.css" rel="stylesheet">
+		<![endif]-->
+
+    <!-- start: Favicon -->
+    <link rel="shortcut icon" href='{% static "img/favicon.ico"%}'>
+    <!-- end: Favicon -->
+
+
+
+
+</head>
+
+<body>
+<!-- start: Header -->
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="{% url 'home' %}"><span>Labvantage</span></a>
+
+            <!-- start: Header Menu -->
+            <div class="nav-no-collapse header-nav">
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="halflings-icon white user"></i>{{ user.username }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-menu-title">
+                                <span>Account Settings</span>
+                            </li>
+                            <li><a href="#"><i class="halflings-icon cog"></i> Settings</a></li>
+                            {% if user.is_lab_manager %}
+
+                            <li><a href="mailto:help@yourITsupports.com"><i class="halflings-icon question-sign"></i> Help</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'logout' %}"><i class="halflings-icon off"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                    <!-- end: User Dropdown -->
+                </ul>
+            </div>
+            <!-- end: Header Menu -->
+
+        </div>
+    </div>
+</div>
+<!-- start: Header -->
+
+<div class="container-fluid-full">
+    <div class="row-fluid">
+
+        <!-- start: Main Menu -->
+        <div id="sidebar-left" class="span2">
+            <div class="nav-collapse sidebar-nav" >
+                <ul class="nav nav-tabs nav-stacked main-menu">
+                    <li><a href="{% url 'home' %}"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>
+
+
+                    <li><a class="dropmenu" href="#"><i class="icon-th-large"></i><span class="hidden-tablet"> </span><span  class="">  Inventory</span></a>
+                        <ul>
+                            {% if user.is_admin or user.is_lab_manager or user.is_deputy_lab_manager%}
+                            <li><a class="submenu" href="{% url 'add_new_product' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">New Product</span></a></li>
+                            <li><a class="submenu" href="{% url 'add_new_test' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">New Test</span></a></li>
+                            <li><a class="submenu" href="{% url 'add_test_info' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">Assign Test</span></a></li>
+                            {% endif %}
+                            <li><a class="submenu" href="{% url 'view_products' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">View Products</span></a></li>
+                            <li><a class="submenu" href="{% url 'view_products_test_list' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">View Assigned Tests</span></a></li>
+                            <li><a class="submenu" href="{% url 'view_tests' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">View Tests</span></a></li>
+
+
+                        </ul>
+                    </li>
+
+                    <li><a class="dropmenu" href="#"><i class="icon-list-alt"></i><span class="hidden-tablet"> </span><span  class=""> Oil Analysis</span></a>
+                        <ul>
+                            {% if user.is_sampler %}
+                            <li><a class="submenu" href="{% url 'create_new_oap' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">Create New</span></a></li>
+                            {% endif %}
+                            {% if user.is_lab_manager or user.is_deputy_lab_manager %}
+                            <li><a class="submenu" href="{% url 'add_new_oap_test' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">Add New OA Test</span></a></li>
+                                <li><a class="submenu" href="{% url 'view_oap_tests' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">View Oil Analysis Tests</span></a></li>
+                            {% endif %}
+                            <li><a class="submenu" href="{% url 'view_oap_reports' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">View OAP Reports</span></a></li>
+                        <li><a href="{% url 'trend' %}"><i class="icon-edit"></i><span class="hidden-tablet"> Trend Analysis</span></a></li>
+
+                        </ul>
+                    </li>
+                    <li><a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> </span><span  class="">LIR</span></a>
+                        <ul>
+
+                             {% if user.is_sampler %}
+
+                            <li><a class="submenu" href="/lir/sampler/"><i class="icon-file-alt"></i><span class="hidden-tablet"> Create New LRF</span></a></li>
+                            {% endif %}
+                            <li><a class="submenu" href="{% url 'view_lrf' %}"><i class="icon-file-alt"></i><span class="hidden-tablet"> View LRF</span></a></li>
+                            <li><a class="submenu" href="{% url 'view lir' %}"><i class="icon-file-alt"></i><span class="hidden-tablet"> View LIR</span></a></li>
+                            <li><a class="submenu" href="{% url 'view_released' %}"><i class="icon-file-alt"></i><span class="hidden-tablet"> View Released</span></a></li>
+
+                        </ul>
+                    </li>
+                <li><a class="dropmenu" href="#"><i class="icon-th-large"></i><span class="hidden-tablet"> </span><span  class="">Instrument Analysis</span></a>
+                        <ul>
+                            {% if user.is_admin or user.is_lab_manager or user.is_deputy_lab_manager%}
+                            <li><a class="submenu" href="{% url 'add_instrument' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">New Instrument</span></a></li>
+                            <li><a class="submenu" href="{% url 'add_calibration_info' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">Calibration Test</span></a></li>
+                            {% endif %}
+                            <li><a class="submenu" href="{% url 'view_instruments' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">View Instruments</span></a></li>
+                            <li><a class="submenu" href="{% url 'schedule_calibration_tests' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">Schedule Tests</span></a></li>
+                        <li><a class="submenu" href="{% url 'view_calibration_tests' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">View Tests</span></a></li>
+
+<li><a class="submenu" href="{% url 'view_internal_reports' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">View Internal Reports</span></a></li>
+
+
+                        </ul>
+                    </li>
+
+                    <li><a class="dropmenu" href="#"><i class="icon-user"></i><span class="hidden-tablet"> </span><span  class="">  Clients</span></a>
+                                            <ul>
+                                                {% if user.is_sampler %}
+                                                <li><a class="submenu" href="{% url 'add_new_customer' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">Add New Customer</span></a></li>
+                                                {% endif %}
+                                                <li><a class="submenu" href="{% url 'view_customers' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">View Customers</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a class="dropmenu" href="#"><i class="icon-adjust"></i><span class="hidden-tablet"> </span><span  class="">  Equipments</span></a>
+                                            <ul>
+                                                {% if user.is_sampler %}
+                                                <li><a class="submenu" href="{% url 'add_new_equipment' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">Add New Equipment</span></a></li>
+                                                {% endif %}
+                                                <li><a class="submenu" href="{% url 'view_equipments' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">View Equipments</span></a></li>
+                                            </ul>
+                                        </li>
+
+
+
+                    <li><a class="dropmenu" href="#"><i class="icon-user"></i><span class="hidden-tablet"> </span><span  class="">Account</span></a>
+
+
+                        <ul>
+                            {% if user.is_admin or user.is_lab_manager %}
+                                {% if user.is_admin %}
+                                <li><a class="submenu" href="{% url 'create_user' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">Create New User</span></a></li>
+                                    {% endif %}
+                                    <li><a class="submenu" href="{% url 'view_users' %}"><i class="icon-file-alt"></i><span class="hidden-tablet">View Users</span></a></li>
+
+                            {% endif %}
+
+                        </ul>
+                </li>
+                </ul>
+
+            </div>
+        </div>
+        <!-- end: Main Menu -->
+
+        <noscript>
+            <div class="alert alert-block span10">
+                <h4 class="alert-heading">Warning!</h4>
+                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+            </div>
+        </noscript>
+
+        <!-- start: Content -->
+        <div id="content" class="span10">
+            {% block content %}
+            {% endblock %}
+
+
+            <!-- end: Content -->
+
+
+        </div><!--/#content.span10-->
+    </div><!--/fluid-row-->
+</div>
+
+<div class="modal hide fade" id="myModal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>Settings</h3>
+    </div>
+    <div class="modal-body">
+        <p>Here settings can be configured...</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        <a href="#" class="btn btn-primary">Save changes</a>
+    </div>
+</div>
+
+
+<div class="clearfix"></div>
+
+<footer>
+
+    <p>
+					<span >
+						<cite>Copyright</cite> &copy; 2017 All Rights Reserved. Developed By
+						<a href="https://www.dreamcatcherit.com" target="_blank"> Dreamcatcher IT</a>
+					</span>
+
+    </p>
+
+</footer>
+
+<!-- start: JavaScript-->
+
+
+<script src="{%static 'js/jquery-1.9.1.min.js'%}"></script>
+<script src="{%static 'js/jquery-migrate-1.0.0.min.js'%}"></script>
+<script src="{%static 'js/jquery-ui-1.10.0.custom.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.ui.touch-punch.js'%}"></script>
+
+<script src="{%static 'js/modernizr.js'%}"></script>
+
+<script src="{%static 'js/bootstrap.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.cookie.js'%}"></script>
+
+<script src="{%static 'js/fullcalendar.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.dataTables.min.js'%}"></script>
+
+<script src="{%static 'js/excanvas.js' %}"></script>
+<script src="{%static 'js/jquery.flot.js'%}"></script>
+<script src="{%static 'js/jquery.flot.pie.js'%}"></script>
+<script src="{%static 'js/jquery.flot.stack.js'%}"></script>
+<script src="{%static 'js/jquery.flot.resize.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.chosen.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.uniform.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.cleditor.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.noty.js'%}"></script>
+
+<script src="{%static 'js/jquery.elfinder.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.raty.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.iphone.toggle.js'%}"></script>
+
+<script src="{%static 'js/jquery.uploadify-3.1.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.gritter.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.imagesloaded.js'%}"></script>
+
+<script src="{%static 'js/jquery.masonry.min.js'%}"></script>
+
+<script src="{%static 'js/jquery.knob.modified.js'%}"></script>
+
+<script src="{%static 'js/jquery.sparkline.min.js'%}"></script>
+
+<script src="{%static 'js/counter.js'%}"></script>
+
+<script src="{%static 'js/retina.js'%}"></script>
+
+<script src="{%static 'js/custom.js'%}"></script>
+<script src="{%static 'js/moment.js'%}"></script>
+<script src="{%static 'js/bootstrap-datetimepicker.min.js'%}"></script>
+<script src="{%static 'base/js/script.js' %}"></script>
+<script src="{%static 'js/bootbox.min.js' %}"></script>
+<script src="{%static 'base/js/Chart.min.js' %}"></script>
+<!-- end: JavaScript-->
+{% block js %}
+
+{% endblock %}
+
+</body>
+</html>

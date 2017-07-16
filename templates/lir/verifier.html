@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Initial Form</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'lir/initial.css' %}">
+</head>
+<body>
+<div class="main">
+    <a href="/lir/verifier_list/">List of all verified data</a>
+    <div id="heading"><h2>LAB TEST REQUEST FORM</h2></div>
+    {% for data in pending_data %}
+
+    <div id="container">
+
+        <form id="req-form" action="/lir/verifier/{{ data.id }}/"  method="post"> {% csrf_token %}
+            <div>
+                <label for="ref_no">Lab No</label>
+                <input type="text" name="ref_no" placeholder="" value="{{ data.ref_no }}"/><br><br>
+            </div>
+            <div>
+                <label for="duration">Date</label>
+                <input type="date" name="date"  placeholder="" value="{{ data.date|date:'Y-m-d'  }}"/><br><br>
+            </div>
+            <div>
+
+                <label for="product_name">Product Name </label>
+                <!-- <input type="text" id="product"  placeholder="">
+              -->
+                <select name="product_name"><br><br>
+                    {% for product in product_name %}
+                    {% if data.product_name == product %}
+                    <option value="{{ product.product_name}}" selected> {{ product.product_name }} </option>
+                    {% else %}
+                    <option value="{{ product.product_name }}">{{ product.product_name }}
+                        {% endif %}
+                        {% endfor %}
+                </select><br><br>
+
+            </div>
+            <div>
+                <label for="batch_number">Lot  Number</label>
+                <input type="text" name="batch_number" placeholder="" value="{{ data.batch_number }}"/><br><br>
+            </div>
+            <div>
+                <label for="sampling_time">Sampling Time</label>
+                <input type="datetime-local" name="sampling_time"  placeholder="" value="{{ data.sampling_time}}"/><br><br>
+
+            </div>
+            <div>
+                <label for="lab_test_number">Lab Test No</label>
+                <input type="text" name="lab_test_number"  placeholder="" value="{{ data.lab_test_number }}" /><br><br>
+            </div>
+            <div>
+
+                <label for="sample_receiving_time">Specimen Collecting Time</label>
+                <input type="datetime-local" name="sample_receiving_time"  placeholder="" value="{{ data.sample_receiving_time  }}"/><br><br>
+            </div>
+            <div>
+                <label for="sample_source">Specimen Origin </label>
+                <input type="text" name="sample_source"  placeholder="" value="{{ data.sample_source }}" /><br><br>
+            </div>
+            <!-- </div> -->
+            <!--
+            <div id="side_bar"> -->
+            <div>
+                <label for="tank_number">Tank No</label>
+                <input type="text" name="tank_number" placeholder="" value="{{ data.tank_number }}" /><br><br>
+            </div>
+            <div>
+                <label for="batch_quantity">Volume</label>
+                <input type="text" name="batch_quantity" placeholder="" value="{{ data.batch_quantity }}" /><br><br>
+            </div>
+            <div>
+
+
+                <label for="releasing_time">Batch Release</label>
+                <input type="datetime-local" name="releasing_time"  placeholder="" value="{{ data.releasing_time }}" /><br><br>
+            </div>
+            <div>
+                <label for="formulation_number">Formulation No</label>
+                <input type="text" name="formulation_number" placeholder="" value="{{ data.formulation_number }}" /><br><br>
+            </div>
+            <div>
+                <label for="sample_type">Specimen Type</label>
+                <input type="text" name="sample_type" placeholder="" value="{{ data.sample_type }}" /><br><br>
+            </div>
+            <!--  </div> -->
+
+
+            <div id="box">
+                <div>
+                    <label for="input">Action:</label>
+                    <input  type="radio" name="permission_status" value="Ver" >Verify</input>
+                </div>
+                <div>
+                    <label>Comments:</label>
+                    <textarea class="blurrable firstToFocus" rows="3" name="comments" cols="46" id="Remarks" > {{ data.comments }}</textarea>
+                </div>
+
+            </div>
+
+            <div><button class="left waves-effect btn-flat brand-text submit-btn" type="submit">Save</button></div>
+            <br/>
+
+        </form>
+    </div>
+    {% endfor %}
+
+
+
+
+    <!-- <button class="left waves-effect btn-flat brand-text submit-btn" type="submit">Save</button>
+    <div><button class="left waves-effect btn-flat brand-text submit-btn" type="submit">Save</button></div> -->
+
+
+
+</div>
+</body>
+</html>

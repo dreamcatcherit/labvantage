@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Initial Form</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'lir/initial.css' %}">
+</head>
+<body>
+<div class="main">
+    <div id="heading"><h2>List of all verified data</h2></div>
+    {% for data in verified_list %}
+
+    <div id="container">
+        {% if messages %}
+        <div class="alert alert-info" role="alert">
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <form id="req-form"> {% csrf_token %}
+            <div>
+                <label for="batch">Lab No</label>
+                <input type="text" name="ref_no" placeholder="" value="{{ data.ref_no }}" readonly/><br><br>
+            </div>
+            <div>
+                <label for="duration">Date</label>
+                <input type="date" name="date"  placeholder="" value="{{ data.date }}" readonly/><br><br>
+            </div>
+            <div>
+
+                <label for="product">Product Name </label>
+                <!-- <input type="text" id="product"  placeholder="">
+              -->
+                <select name="product_name"><br><br>
+                    {% for product in product_name %}
+                    {% if data.product_name == product %}
+                    <option value="{{ product.product_name}}" selected > {{ product.product_name }} </option>
+                        {% endif %}
+                        {% endfor %}
+                </select><br><br>
+
+            </div>
+
+            <div>
+                <label for="batch">Lot  Number</label>
+                <input type="text" name="batch_number" placeholder="" value="{{ data.batch_number }}" readonly/><br><br>
+            </div>
+            <div>
+                <label for="s_time">Sampling Time</label>
+                <input type="date" name="sampling_time"  placeholder="" value="{{ data.sampling_time  }}" readonly/><br><br>
+
+            </div>
+            <div>
+                <label for="lab_test">Lab Test No</label>
+                <input type="text" name="lab_test_number"  placeholder="" value="{{ data.lab_test_number }}" readonly /><br><br>
+            </div>
+            <div>
+
+                <label for="s_time">Specimen Collecting Time</label>
+                <input type="date" name="sample_receiving_time"  placeholder="" value="{{ data.sample_receiving_time  }}" readonly/><br><br>
+            </div>
+            <div>
+                <label for="s_src">Specimen Origin </label>
+                <input type="text" name="sample_source"  placeholder="" value="{{ data.sample_source }}" readonly/><br><br>
+            </div>
+            <!-- </div> -->
+            <!--
+            <div id="side_bar"> -->
+            <div>
+                <label for="tank_no">Tank No</label>
+                <input type="text" name="tank_number" placeholder="" value="{{ data.tank_number }}" readonly/><br><br>
+            </div>
+            <div>
+                <label for="quantity">Volume</label>
+                <input type="text" name="batch_quantity" placeholder="" value="{{ data.batch_quantity }}" readonly /><br><br>
+            </div>
+            <div>
+
+
+                <label for="r_time">Batch Release</label>
+                <input type="date" name="releasing_time"  placeholder="" value="{{ data.releasing_time }}" readonly /><br><br>
+            </div>
+            <div>
+                <label for="f_no">Formulation No</label>
+                <input type="text" name="formulation_number" placeholder="" value="{{ data.formulation_number }}" readonly /><br><br>
+            </div>
+            <div>
+                <label for="s_type">Specimen Type</label>
+                <input type="text" name="sample_type" placeholder="" value="{{ data.sample_type }}"  readonly /><br><br>
+            </div>
+            <!--  </div> -->
+
+            <br/>
+
+        </form>
+    </div>
+    {% endfor %}
+
+
+
+
+    <!-- <button class="left waves-effect btn-flat brand-text submit-btn" type="submit">Save</button>
+    <div><button class="left waves-effect btn-flat brand-text submit-btn" type="submit">Save</button></div> -->
+
+
+
+</div>
+<script src="{% static 'lir/initial.js' %}"></script>
+</body>
+</html>

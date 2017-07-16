@@ -1,0 +1,167 @@
+{% extends "base/base.html" %}
+{% block title %}Create New Lab Request{% endblock %}
+{% block content %}
+
+      <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+          <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'view_lrf' %}">View LRF</a>
+    <i class="icon-angle-right"></i>
+</li>
+        <li>
+    <a href="#">Create New LRF</a>
+</li>
+
+</ul>
+    <div class="row-fluid sortable">
+         {% if messages %}
+            <div class="alert alert-info" role="alert">
+              <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+         {% endif %}
+				<div class="box span8 offset2">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span>Request Form</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content offset1">
+						<form class="form-horizontal " action="/lir/sampler/" method="post">{% csrf_token %}
+							<fieldset>
+
+							  <div class="control-group">
+				                    <label class="control-label" for="product_name">Product Name</label>
+								        <div class="controls">
+								                <select id="product" name="product_name" data-rel="chosen">
+                                                {% for product in product_name %}
+                                                        <option value="{{ product.product_name }}">{{ product.product_name }}</option>
+                                                {% endfor %}
+                                              </select>
+								        </div>
+                              </div>
+							<div class="control-group">
+								<label class="control-label" for="ref_no">Lab No:</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="ref_no" type="text" >
+								</div>
+							  </div>
+
+
+							  <div class="control-group">
+								<label class="control-label" for="batch_number">Lot  Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="batch_number" type="text" >
+								</div>
+							  </div>
+                            <div class="control-group">
+                                    <label class="control-label" for="date">Date:</label>
+                                    <div class="controls">
+                                        <div id="datetimepicker4" class="input-append date">
+                                            <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="date" value="{{ report.date }}"/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                  <label class="control-label" for="sampling_time">Sampling Time:</label>
+								<div class="controls">
+								    <div id="datetimepicker1" class="input-append date">
+                                        <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="sampling_time"/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                      </div>
+                                    </div>
+							  </div>
+                                <div class="control-group">
+
+                                  <label class="control-label" for="sample_receiving_time">Specimen Collecting Time:</label>
+								<div class="controls">
+								    <div id="datetimepicker2" class="input-append date">
+                                        <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="sample_receiving_time"/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                      </div>
+                                    </div>
+							  </div>
+                             <div class="control-group">
+
+                                  <label class="control-label" for="releasing_time">Batch Release:</label>
+								<div class="controls">
+								    <div id="datetimepicker3" class="input-append date">
+                                        <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="releasing_time"/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                      </div>
+                                    </div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="lab_test_number">Lab Test Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="lab_test_number" type="text" >
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="sample_source">Specimen Origin </label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="sample_source" type="text" >
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="tank_number">Reservoir Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="tank_number" type="text" >
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="batch_quantity">Volume</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="batch_quantity" type="text" >
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="formulation_number">Formulation No</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="formulation_number" type="text" >
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="sample_type">Specimen Type</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="sample_type" type="text" >
+								</div>
+							  </div>
+							  <div style="margin-left:50%">
+								<button type="submit" class="btn btn-primary">Save changes</button>
+								<button class="btn" onclick="javascript:history.back()">Cancel</button>
+							  </div>
+							</fieldset>
+						  </form>
+
+					</div>
+				</div>
+
+			</div>
+    
+{%endblock %}

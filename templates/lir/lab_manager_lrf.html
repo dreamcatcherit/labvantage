@@ -1,0 +1,306 @@
+{% extends "base/base.html" %}
+{% block title %}Lab Request Form{% endblock %}
+{% block content %}
+
+      <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+          <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'view_lrf' %}">View LRF</a>
+    <i class="icon-angle-right"></i>
+</li>
+        <li>
+    <a href="#"> {{ report.ref_no }}</a>
+</li>
+
+</ul>
+    <div class="row-fluid sortable">
+        {% if messages %}
+            <div class="alert alert-info" role="alert">
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div class="box span12">
+            <div class="box-header" data-original-title>
+                <h2><i class="halflings-icon edit"></i><span class="break"></span>Request Form</h2>
+                <div class="box-icon">
+                    <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                {% if report.permission_status == 'Ver' %}
+                        <form id='req-form' action="/lir/lab_manager/{{ report.id }}/" method="post" class="form-horizontal">{% csrf_token %}
+                            <fieldset>
+                               <div class="control-group">
+                                    <label class="control-label" for="ref_no">Lab No</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" name="ref_no" type="text" value="{{ report.ref_no }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="date">Date:</label>
+                                    <div class="controls">
+                                        <div class="input-append date">
+                                            <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="date" value="{{ report.date|date:'Y-m-d' }} {{ report.date|time:'g:i:s' }}"/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="product_name">Product Name</label>
+                                    <div class="controls">
+                                        <select id="product" name="product_name" data-rel="chosen">
+                                            {% for product in product_name %}
+                                                {% if report.product_name == product %}
+                                                    <option value="{{ product.product_name}}" selected> {{ product.product_name }} </option>
+                                                {% else %}
+                                                    <option value="{{ product.product_name }}">{{ product.product_name }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class='control-group'>
+                                    <label class="control-label" for="batch_number">Lot  Number</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" name="batch_number" type="text" value="{{ report.batch_number }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="sampling_time">Sampling Time:</label>
+                                    <div class="controls">
+                                        <div  class="input-append date">
+                                            <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="sampling_time" value="{{ report.sampling_time|date:'Y-m-d' }} {{ report.sampling_time|time:'g:i:s' }}" readonly>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+
+                                    <label class="control-label" for="sample_receiving_time">Specimen Collecting Time:</label>
+                                    <div class="controls">
+                                        <div class="input-append date">
+                                            <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="sample_receiving_time" value="{{ report.sample_receiving_time|date:'Y-m-d' }} {{ report.sample_receiving_time|time:"g:i:s" }}" />
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+
+                                    <label class="control-label" for="releasing_time">Batch Release:</label>
+                                    <div class="controls">
+                                        <div class="input-append date">
+                                            <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="releasing_time" value="{{ report.releasing_time|date:'Y-m-d' }} {{ report.releasing_time|time:"g:i:s" }}"/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="lab_test_number">Lab Test Number</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" name="lab_test_number" type="text" value="{{ report.lab_test_number  }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="sample_source">Specimen Origin </label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" name="sample_source" type="text" value="{{ report.sample_source  }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="tank_number">Reservoir Number</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" name="tank_number" type="text" value="{{ report.tank_number  }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="batch_quantity">Volume</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" name="batch_quantity" type="text" value="{{ report.batch_quantity  }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="formulation_number">Formulation No</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" name="formulation_number" type="text" value="{{ report.formulation_number  }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="sample_type">Specimen Type</label>
+                                    <div class="controls">
+                                        <input class="input-xlarge focused" name="sample_type" type="text" value="{{ report.sample_type}}" readonly>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="action">Action</label>
+                                    <div class="controls">
+                                        <select name="permission_status" data-rel="chosen">
+                                            <option value="Apr">Approve</option>
+                                            <option value="Rej">Reject</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group hidden-phone">
+                                    <label class="control-label" for="comments">Comments</label>
+                                    <div class="controls">
+                                        <textarea class="input-xlarge focused" name="comments" rows="5" >{{ report.comments  }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button class="btn" onclick="javascript:history.back()">Cancel</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                {% elif report.permission_status == 'Apr' or  report.permission_status == 'Rej' or report.permission_status == 'Pen' %}
+                    <form id='req-form' action="" method="post" class="form-horizontal">{% csrf_token %}
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label" for="ref_no">Lab No</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="ref_no" type="text" value="{{ report.ref_no }}" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="date">Date:</label>
+                                <div class="controls">
+                                    <div class="input-append date">
+                                        <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="date" value="{{ report.date }}" readonly/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="product_name">Product Name</label>
+                                <div class="controls">
+                                    <select id="product" name="product_name" data-rel="chosen">
+                                                <option value="{{ report.product_name}}" selected > {{ report.product_name }} </option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class='control-group'>
+                                <label class="control-label" for="batch_number">Lot  Number</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="batch_number" type="text" value="{{ report.batch_number }}" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="sampling_time">Sampling Time:</label>
+                                <div class="controls">
+                                    <div class="input-append date">
+                                        <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="sampling_time" value="{{ report.sampling_time  }}" readonly/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+
+                                <label class="control-label" for="sample_receiving_time">Specimen Collecting Time:</label>
+                                <div class="controls">
+                                    <div class="input-append date">
+                                        <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="sample_receiving_time" value="{{ report.sample_receiving_time  }}" readonly/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+
+                                <label class="control-label" for="releasing_time">Batch Release:</label>
+                                <div class="controls">
+                                    <div class="input-append date">
+                                        <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="releasing_time" value="{{ report.releasing_time  }}" readonly/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="lab_test_number">Lab Test Number</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="lab_test_number" type="text" value="{{ report.lab_test_number  }}" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="sample_source">Specimen Origin </label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="sample_source" type="text" value="{{ report.sample_source  }}" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="tank_number">Reservoir Number</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="tank_number" type="text" value="{{ report.tank_number  }}" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="batch_quantity">Volume</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="batch_quantity" type="text" value="{{ report.batch_quantity  }}" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="formulation_number">Formulation No</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="formulation_number" type="text" value="{{ report.formulation_number  }}" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="sample_type">Specimen Type</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="sample_type" type="text" value="{{ report.sample_type}}" readonly>
+                                </div>
+                            </div>
+                            {% if report.comments %}
+                            <div class="control-group hidden-phone">
+                                <label class="control-label" for="comments">Comments</label>
+                                <div class="controls">
+                                    <textarea class="input-xlarge focused" name="comments" rows="5" >{{ report.comments  }}</textarea>
+                                </div>
+                            </div>
+                                {% endif %}
+                        </fieldset>
+                    </form>
+            {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+{%endblock %}

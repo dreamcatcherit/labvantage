@@ -1,0 +1,660 @@
+{% extends "base/base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+<ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+    <li>
+    <a href="{% url 'home' %}">Dashboard</a>
+
+</li>
+
+</ul>
+{% if user.is_lab_manager or user.is_deputy_lab_manager %}
+<div class="row-fluid sortable">
+							<div class="box span4">
+								<div class="box-header">
+								<h2><i class="halflings-icon white list-alt"></i><span class="break"></span>Lab Inspection Report</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-setting"><i class="halflings-icon  white wrench"></i></a>
+										<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+									</div>
+								</div>
+                                <div class="box-content">
+<div class="span2" style="margin-top:10%">
+                                                                                                                                   <span class="label label-warning">Pending: {{ data.Pen }}</span>
+                                                                                                                                   <span class="label label-info">Verified: {{ data.Ver }}</span>
+
+
+                                        <span class="label label-success">Approved: {{ data.Apr }}</span>
+                                                                                                                                   <span class="label label-important">Rejected: {{ data.Rej }}</span>
+
+                                    </div>
+
+                                    <div class="span2">
+                                     <canvas id="lir_chart" height="inherit" width="inherit"></canvas>
+
+
+                                </div>
+
+
+								</div>
+							</div>
+
+							<div class="box span4 ">
+								<div class="box-header" data-original-title>
+									<h2><i class="halflings-icon white list-alt"></i><span class="break"></span>Oil Analysis Program</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+										<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+									</div>
+								</div>
+								<div class="box-content">
+                                    <div class="span2" style="margin-top:10%">
+                                                                                                                                   <span class="label label-warning">Pending: {{ data.oapPen }}</span>
+                                                                                                                                   <span class="label label-info">Verified: {{ data.oapVer }}</span>
+
+
+                                        <span class="label label-success">Approved: {{ data.oapApr }}</span>
+                                                                                                                                   <span class="label label-important">Rejected: {{ data.oapRej }}</span>
+
+                                    </div>
+
+<div class="span2">
+									<canvas id="oap_chart" height="inherit" width="inherit"></canvas>
+    </div>
+								</div>
+							</div>
+
+
+                        <div class="box span4 ">
+								<div class="box-header" data-original-title>
+									<h2><i class="halflings-icon white list-alt"></i><span class="break"></span>Calibration Tests</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+										<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+									</div>
+								</div>
+								<div class="box-content">
+<div class="span2" style="margin-top:10%">
+                                                                                                                                   <span class="label label-success">Completed: {{ data.eqpC }}</span>
+                                                                                                                                   <span class="label label-important">Incomplete: {{ data.eqpIC }}</span>
+                       </div>
+
+<div class="span2">
+									<canvas id="equipment_chart" height="inherit" width="inherit"></canvas>
+    </div>
+								</div>
+							</div>
+
+</div>
+
+
+<div class="row-fluid">
+    <div class="box span12">
+    <div class="box-header" data-original-title>
+						<h2><i class="halflings-icon white list"></i><span class="break"></span>Finished Product's Report Summary</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+						</div>
+					</div>
+        <div class="box-content">
+    <div class="row-fluid hideInIE8 circleStats">
+
+							<div class="span2" onTablet="span4" onDesktop="span2">
+								<div class="circleStatsItemBox yellow">
+									<div class="header">Pending</div>
+									<span class="percent">reports</span>
+									<div class="circleStat">
+										<input type="text" value="{{ data.Pen }}" class="whiteCircle" />
+									</div>
+									<div class="footer">
+										<span class="count">
+											<span class="value">{{ data.Pen }}</span>
+										</span>
+										<span class="sep"> / </span>
+										<span class="value">
+											<span class="number">{{ data.All }}</span>
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="span2" onTablet="span4" onDesktop="span2">
+								<div class="circleStatsItemBox blue">
+									<div class="header">Verified</div>
+									<span class="percent">reports</span>
+									<div class="circleStat">
+										<input type="text" value="{{ data.Ver }}" class="whiteCircle" />
+									</div>
+						                <div class="footer">
+										<span class="count">
+											<span class="value">{{ data.Ver }}</span>
+										</span>
+										<span class="sep"> / </span>
+										<span class="value">
+											<span class="number">{{ data.All }}</span>
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="span2" onTablet="span4" onDesktop="span2">
+								<div class="circleStatsItemBox green">
+									<div class="header">Approved</div>
+									<span class="percent">reports</span>
+									<div class="circleStat">
+										<input type="text" value="{{ data.Apr }}" class="whiteCircle" />
+									</div>
+                                	<div class="footer">
+										<span class="count">
+											<span class="value">{{ data.Apr }}</span>
+										</span>
+										<span class="sep"> / </span>
+										<span class="value">
+											<span class="number">{{ data.All }}</span>
+										</span>
+									</div>
+                                </div>
+							</div>
+
+							<div class="span2 noMargin" onTablet="span4" onDesktop="span2">
+								<div class="circleStatsItemBox red">
+									<div class="header">Rejected</div>
+									<span class="percent">reports</span>
+									<div class="circleStat">
+										<input type="text" value="{{ data.Rej }}" class="whiteCircle" />
+									</div>
+                                    <div class="footer">
+										<span class="count">
+											<span class="value">{{ data.Rej }}</span>
+										</span>
+										<span class="sep"> / </span>
+										<span class="value">
+											<span class="number">{{ data.All }}</span>
+										</span>
+									</div>
+								</div>
+							</div>
+
+                                <div class="span2 noMargin" onTablet="span4" onDesktop="span2">
+                                            <div class="circleStatsItemBox pink">
+                                                <div class="header">Total</div>
+                                                <span class="percent">reports</span>
+                                                <div class="circleStat">
+                                                    <input type="text" value="{{ data.All }}" class="whiteCircle" />
+                                                </div>
+                                                <div class="footer">
+										<span class="count">
+											<span class="value">{{ data.All }}</span>
+										</span>
+										<span class="sep"> / </span>
+										<span class="value">
+											<span class="number">{{ data.All }}</span>
+										</span>
+									</div>
+								</div>
+                                            </div>
+
+                                <div class="span2 noMargin" onTablet="span4" onDesktop="span2">
+                                            <div class="circleStatsItemBox greenDark">
+                                                <div class="header">Approval Rate</div>
+                                                <span class="percent">percents</span>
+                                                <div class="circleStat">
+                                                    <input type="text" value="{{ data.Per }}" class="whiteCircle" />
+                                                </div>
+
+								</div>
+                                </div>
+                                        </div>
+						</div>
+    </div>
+</div>
+	{% endif %}
+
+    <div class="row-fluid">
+
+				<div class="box span12">
+					<div class="box-header">
+						<h2><i class="halflings-icon white th"></i><span class="break"></span>Activity Log</h2>
+					</div>
+					<div class="box-content">
+						<ul class="nav tab-menu nav-tabs" id="myTab">
+							<li class="active"><a href="#lir">LIR</a></li>
+							<li><a href="#oap">OA</a></li>
+							<li><a href="#eims">Instrument Analysis</a></li>
+						</ul>
+
+						<div id="myTabContent" class="tab-content">
+							<div class="tab-pane active" id="lir">
+								  <div class="row-fluid">
+                        {% if user.is_lab_manager %}
+							<div class="box span4" onTablet="span6" onDesktop="span4">
+								<div class="box-header">
+									<h2><i class=" halflings-icon white time"></i><span class="break"></span>Late Analysis</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+									</div>
+								</div>
+								<div class="box-content">
+									<ul class="dashboard-list pre-scrollable">
+                                        {% for data in late %}
+										<li>
+											<a href="/lir/view_lir/id/{{ data.product_info.id }}">
+												<i class="icon-arrow-down red"></i>
+												<span class="red"></span>
+												<strong>{{ data.sign }} </strong> {{ data.last_modified }} <br>
+                                                <strong>Due time:</strong> {{data.product_info.lab_request_form.releasing_time}}
+											</a>
+										</li>
+                                        {% endfor %}
+
+									</ul>
+								</div>
+							</div>
+                            {% else%}
+                            <div class="box span4" onTablet="span6" onDesktop="span4">
+								<div class="box-header">
+									<h2><i class="halflings-icon list"></i><span class="break"></span>To be Approved</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon  white remove"></i></a>
+									</div>
+								</div>
+								<div class="box-content">
+									<ul class="dashboard-list pre-scrollable">
+                                        {% for report in verified %}
+										<li>
+
+											<a href="/lir/reference_number/{{ report.ref_no}}"><strong>{{ report.product_name }} ({{ report.batch_number }}) </strong>  {{ report.releasing_time }}</a><br>
+											<span class="label label-info">verified</span>
+										</li>
+                                        {% endfor %}
+									</ul>
+								</div>
+							</div>
+
+                        {% endif %}
+
+							<div class="box span4" onTablet="span6" onDesktop="span4">
+								<div class="box-header">
+									<h2><i class="halflings-icon white  list"></i><span class="break"></span>To be verified</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+									</div>
+								</div>
+								<div class="box-content">
+									<ul class="dashboard-list pre-scrollable">
+                                        {% for report in pending %}
+										<li>
+
+											<a href="/lir/reference_number/{{ report.ref_no}}"><strong>{{ report.product_name }} ({{ report.batch_number }}) </strong>  {{ report.releasing_time }}</a><br>
+											<span class="label label-warning">pending</span>
+										</li>
+                                        {% endfor %}
+									</ul>
+								</div>
+							</div>
+                        <div class="box span4" onTablet="span6" onDesktop="span4">
+								<div class="box-header">
+									<h2><i class="halflings-icon white list"></i><span class="break"></span>Most Recent</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+									</div>
+								</div>
+                            <div class="box-content">
+									<ul class="dashboard-list pre-scrollable">
+                                        {% for report in recent %}
+										<li>
+
+											<a href="/lir/view_lir/id/{{ report.id}}"><strong>{{ report.product_name }} ({{ report.batch_number }}) </strong>  {{ report.updated_at }}</a><br>
+										 {% if report.permission_status == 'Pen' %}
+                                <span class="label label-warning">Pending</span>
+                                {% elif report.permission_status == 'Apr' %}
+                                <span class="label label-success">Approved</span>
+                                {% elif report.permission_status == 'Ver' %}
+                                <span class="label label-info">Verified</span>
+                                {% elif report.permission_status == 'Rej' %}
+                                    <span class="label label-important">Rejected</span>
+                                {% endif %}
+
+										</li>
+                                        {% endfor %}
+									</ul>
+								</div>
+							</div>
+
+
+								</div>
+
+
+							</div>
+							<div class="tab-pane" id="oap">
+                        <div class="box span4" onTablet="span6" onDesktop="span4">
+								<div class="box-header">
+									<h2><i class="halflings-icon white list"></i><span class="break"></span>Most Recent</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+									</div>
+								</div>
+                            <div class="box-content">
+									<ul class="dashboard-list pre-scrollable">
+                                        {% for report in oap_recent %}
+										<li>
+
+											<a href="{% url 'view_oap_report' report.id %}"><strong>{{ report.customer_contact.customer_name }} ({{ report.equipment_details.equipment_model }}) </strong>  {{ report.last_modified }}</a><br>
+										 {% if report.permission_status == 'Pen' %}
+                                <span class="label label-warning">Pending</span>
+                                {% elif report.permission_status == 'Apr' %}
+                                <span class="label label-success">Approved</span>
+                                {% elif report.permission_status == 'Ver' %}
+                                <span class="label label-info">Verified</span>
+                                {% elif report.permission_status == 'Rej' %}
+                                    <span class="label label-important">Rejected</span>
+                                {% elif report.permission_status == 'Ini' %}
+                                    <span class="label ">Initial</span>
+                                {% endif %}
+
+										</li>
+                                        {% endfor %}
+									</ul>
+								</div>
+							</div>
+
+                            <div class="box span4" onTablet="span6" onDesktop="span4">
+								<div class="box-header">
+									<h2><i class="halflings-icon list"></i><span class="break"></span>Pending</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+									</div>
+								</div>
+                            <div class="box-content">
+									<ul class="dashboard-list pre-scrollable">
+                                        {% for report in oap_pending %}
+										<li>
+
+											<a href="{% url 'view_oap_report' report.id %}"><strong>{{ report.customer_contact.customer_name }} ({{ report.equipment_details.equipment_model }}) </strong>  {{ report.last_modified }}</a><br>
+										 {% if report.permission_status == 'Pen' %}
+                                <span class="label label-warning">Pending</span>
+                                {% elif report.permission_status == 'Apr' %}
+                                <span class="label label-success">Approved</span>
+                                {% elif report.permission_status == 'Ver' %}
+                                <span class="label label-info">Verified</span>
+                                {% elif report.permission_status == 'Rej' %}
+                                    <span class="label label-important">Rejected</span>
+                                {% elif report.permission_status == 'Ini' %}
+                                    <span class="label ">Initial</span>
+                                {% endif %}
+
+										</li>
+                                        {% endfor %}
+									</ul>cmd
+
+								</div>
+							</div>
+
+                            <div class="box span4" onTablet="span6" onDesktop="span4">
+								<div class="box-header">
+									<h2><i class="halflings-icon list"></i><span class="break"></span>Approved</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+									</div>
+								</div>
+                            <div class="box-content">
+									<ul class="dashboard-list pre-scrollable">
+                                        {% for report in oap_approved %}
+										<li>
+
+											<a href="{% url 'view_oap_report' report.id %}"><strong>{{ report.customer_contact.customer_name }} ({{ report.equipment_details.equipment_model }}) </strong>  {{ report.last_modified }}</a><br>
+										 {% if report.permission_status == 'Pen' %}
+                                <span class="label label-warning">Pending</span>
+                                {% elif report.permission_status == 'Apr' %}
+                                <span class="label label-success">Approved</span>
+                                {% elif report.permission_status == 'Ver' %}
+                                <span class="label label-info">Verified</span>
+                                {% elif report.permission_status == 'Rej' %}
+                                    <span class="label label-important">Rejected</span>
+                                {% elif report.permission_status == 'Ini' %}
+                                    <span class="label ">Initial</span>
+                                {% endif %}
+
+										</li>
+                                        {% endfor %}
+									</ul>
+								</div>
+							</div>
+
+							</div>
+							<div class="tab-pane" id="eims">
+                                <div class="box span4" onTablet="span6" onDesktop="span4">
+								<div class="box-header">
+									<h2><i class="halflings-icon list"></i><span class="break"></span>Current Tests</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+									</div>
+								</div>
+                            <div class="box-content">
+									<ul class="dashboard-list pre-scrollable">
+                                        {% for report in current_tests %}
+										<li>
+
+											<a href="{% url 'view_calibration_test' report.id %}"><strong>{{ report.calibration_test_name }}</strong>  {{ report.scheduled_at }}</a><br>
+
+                                {% if report.status == 'C' %}
+                                <span class="label label-success">Complete</span>
+                                {% elif report.status == 'IC' %}
+                                    <span class="label label-important">Incomplete</span>
+                                {% endif %}
+
+										</li>
+                                        {% endfor %}
+									</ul>
+								</div>
+							</div>
+
+
+                              <div class="box span4" onTablet="span6" onDesktop="span4">
+								<div class="box-header">
+									<h2><i class="halflings-icon list"></i><span class="break"></span>Incomplete Tests</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+									</div>
+								</div>
+                            <div class="box-content">
+									<ul class="dashboard-list pre-scrollable">
+                                        {% for report in incomplete_tests %}
+										<li>
+
+											<a href="{% url 'view_calibration_test' report.id %}"><strong>{{ report.calibration_test_name }}</strong>  {{ report.scheduled_at }}</a><br>
+
+                                {% if report.status == 'C' %}
+                                <span class="label label-success">Complete</span>
+                                {% elif report.status == 'IC' %}
+                                    <span class="label label-important">Incomplete</span>
+                                {% endif %}
+
+										</li>
+                                        {% endfor %}
+									</ul>
+								</div>
+							</div>
+
+                              <div class="box span4" onTablet="span6" onDesktop="span4">
+								<div class="box-header">
+									<h2><i class="halflings-icon list"></i><span class="break"></span>Completed Tests</h2>
+									<div class="box-icon">
+										<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+										<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+									</div>
+								</div>
+                            <div class="box-content">
+									<ul class="dashboard-list pre-scrollable">
+                                        {% for report in completed_tests %}
+										<li>
+
+											<a href="{% url 'view_calibration_test' report.id %}"><strong>{{ report.calibration_test_name }}</strong>  {{ report.scheduled_at }}</a><br>
+
+                                {% if report.status == 'C' %}
+                                <span class="label label-success">Complete</span>
+                                {% elif report.status == 'IC' %}
+                                    <span class="label label-important">Incomplete</span>
+                                {% endif %}
+
+										</li>
+                                        {% endfor %}
+									</ul>
+								</div>
+							</div>
+
+
+        						</div>
+						</div>
+					</div>
+				</div><!--/span-->
+
+			</div><!--/row-->
+
+    <div class="row-fluid">
+			<div class="box span12">
+
+					<div class="box-header">
+						<h2><i class="halflings-icon white hand-top"></i><span class="break"></span>Quick Links</h2>
+					</div>
+					<div class="box-content ">
+
+
+				<a class="quick-button metro blue span2" href="{% url 'view lir' %}">
+					<i class="icon-barcode"></i>
+					<p style="text-align:center">LIR</p>
+					<!-- <span class="badge">237</span> -->
+				</a>
+				<a class="quick-button metro yellow span2" href="{% url 'view_oap_reports' %}">
+					<i class="icon-beaker"></i>
+					<p style="text-align:center">Oil Analysis</p>
+					<!-- <span class="badge">46</span> -->
+				</a>
+				<a class="quick-button metro purple span2" href="{% url 'trend' %}">
+					<i class="icon-bar-chart"></i>
+					<p style="text-align:center">Trend Analysis (UO) </p>
+					<!-- <span class="badge">13</span> -->
+				</a>
+				<a class="quick-button metro green span2" href="{%url 'view_equipments' %}">
+					<i class="icon-check-empty"></i>
+					<p style="text-align:center">Equipments</p>
+				</a>
+				<a class="quick-button metro red span2" href="{%url 'view_calibration_tests' %}">
+					<i class="icon-envelope"></i>
+					<p style="text-align:center">Cal Reports</p>
+				</a>
+				<a class="quick-button metro pink span2" href="{% url 'view_internal_reports' %}">
+					<i class="icon-calendar"></i>
+					<p style="text-align:center">Instrument Reports</p>
+				</a>
+				<div class="clearfix"></div>
+				</div>
+
+			</div>
+			</div>
+
+
+
+{%endblock %}
+
+
+{% block js %}
+ <script type="text/javascript">
+            var ctx = document.getElementById("lir_chart").getContext('2d')
+            var optionsPie = {
+        tooltipEvents: [],
+        showTooltips: true,
+        onAnimationComplete: function() {
+            this.showTooltip(this.segments, true);
+        },
+
+    }
+            var pieData = [
+       {
+          value: {{ data.Pen }},
+          label: 'Pending',
+          color: 'orange'
+       },
+       {
+          value: {{ data.Ver }},
+          label: 'Verified',
+          color: 'lightBlue'
+       },
+       {
+          value: {{ data.Apr }},
+          label: 'approved',
+          color: 'lightgreen'
+       },
+       {
+          value : {{data.Rej}},
+          label: 'Rejected',
+          color: 'red'
+       }
+    ];
+      new Chart(ctx).Pie(pieData);
+
+
+ var ctx2 = document.getElementById("oap_chart").getContext('2d')
+            var data = [
+       {
+          value: {{ data.oapPen }},
+          label: 'Pending',
+          color: 'orange'
+       },
+       {
+          value: {{ data.oapVer }},
+          label: 'Verified',
+          color: 'lightblue'
+       },
+       {
+          value: {{ data.oapApr }},
+          label: 'approved',
+          color: 'lightGreen'
+       },
+       {
+          value : {{data.oapRej}},
+          label: 'Rejected',
+          color: 'red'
+       }
+    ];
+      new Chart(ctx2).Pie(data);
+
+var ctx3 = document.getElementById("equipment_chart").getContext('2d')
+            var data2 = [
+       {
+          value: {{ data.eqpC }},
+          label: 'Completed',
+          color: 'lightGreen'
+       },
+       {
+          value : {{data.eqpIC}},
+          label: 'Incomplete',
+          color: 'rgba(255,0,0,0.6)'
+       }
+    ];
+      new Chart(ctx3).Pie(data2);
+
+
+
+
+        </script>
+{% endblock %}

@@ -1,0 +1,128 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+header,section,footer,aside,nav,article,header{
+	display: block;
+}
+body{
+	width: 100%;
+	margin: 30px auto;
+	display: -webkit-box;
+	-webkit-box-pack:center;
+	box-shadow: 1px 2px 4px rgb(38, 160, 218);
+ 	 background: -webkit-linear-gradient(rgb(38,160,218), rgb(25,121,202));
+ 	 border: 10px solid transparent;
+ 	 text-align: center;
+
+}
+h1{
+	 font-weight: bold;
+	 color: white;
+	 font-size: 20px;
+	  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+#wrapper{
+	max-width: 1000px;
+	display: -webkit-box;
+	-webkit-box-flex:1;
+	-webkit-box-orient:vertical;
+	margin: 20px 0px;
+}
+
+#container{
+	 display: -webkit-box;
+     max-width: 1000px;
+     margin: 20px 0px;
+    -webkit-box-flex:1;
+     font-size: 14px;
+ 
+}
+#kid1{
+
+	padding: 50px;
+    max-width: 500px;
+    display: -webkit-box;
+	border: 2px solid rgb(44,62,80);
+	height: 200px;
+    background: rgb(28,78,230);
+   -webkit-box-shadow: 0 10px 6px -6px #777;
+   
+     }
+
+#kid2{
+
+	 padding: 50px;
+     max-width: 500px;
+     display: -webkit-box;
+	 border: 2px solid rgb(44,62,80);
+	 height: 200px;
+     background: rgb(28,78,230);
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+    
+    
+ 	 
+}
+label {
+	color: white;
+
+    text-shadow: 1px 1px 2px black, 0 0 25px blue;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+     font-weight: bold;
+     text-align: center;
+     outline: 0;
+     font-size: 14px;
+     height: 5px;
+     width: 203px;
+     margin-top: 4px;
+     margin-left: 10px;
+     text-align: left;
+     clear: both;
+     float: left;
+
+
+}
+ input {
+height: 20px;
+border: 1px solid #000;
+
+}
+  
+ #container{
+ 	display: -webkit-box;
+     max-width: 1000px;
+     margin: 20px 0px;
+    -webkit-box-flex:1;
+     font-size: 14px;
+
+  } 
+  #header h1{
+  	font-weight: bold;
+  	text-align: center;
+  	margin: 20px;
+  	padding: 5px;
+  }
+  #top_menu{
+ 
+    display: -webkit-box;
+	border: 2px solid rgb(44,62,80);
+    width: 960px;
+	height: 300px;
+	 box-shadow: 1px 2px 4px rgba(88, 206, 245, .2);
+ 	 background: -webkit-linear-gradient(rgba(88,206,245,0.2), blue);
+  
+
+}
+
+table, td {
+   	height: 50px;
+   	border: 2px solid black;
+   	 border-collapse: collapse;
+     width: 203px;
+
+
+} 
+td{
+	color: white;
+	text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}

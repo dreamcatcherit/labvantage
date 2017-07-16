@@ -1,0 +1,155 @@
+{% extends "base/base.html" %}
+{% block title %}Create New Lab Request{% endblock %}
+{% block content %}
+    <div class="row-fluid sortable">
+         {% if messages %}
+            <div class="alert alert-info" role="alert">
+              <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+         {% endif %}
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span>Request Form</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<form id="req-form" class="form-horizontal">{% csrf_token %}
+							<fieldset>
+							<div class="control-group">
+								<label class="control-label" for="ref_no">Lab No</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="ref_no" type="text" readonly>
+								</div>
+							  </div>
+							  <div class="control-group">
+				                    <label class="control-label" for="product">Product Name</label>
+								        <div class="controls">
+								                <select id="product" name="product_name" data-rel="chosen">
+                                                {% for product in product_name %}
+                    {% if data.product_name == product %}
+                    <option value="{{ product.product_name}}" selected > {{ product.product_name }} </option>
+                    {% else %}
+                    <option value="{{ product.product_name }}">{{ product.product_name }}
+                        {% endif %}
+                        {% endfor %}
+                                              </select>
+								        </div>
+                              </div>
+
+
+							  <div class="control-group">
+								<label class="control-label" for="batch_number">Lot  Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="batch_number" type="text" readonly>
+								</div>
+							  </div>
+                                <div class="control-group">
+                                  <label class="control-label" for="sampling_time">Sampling Time:</label>
+								<div class="controls">
+								    <div id="datetimepicker1" class="input-append date">
+                                        <input data-format="dd-MM-yyyy hh:mm:ss" type="text" name="sampling_time" value="{{ data.sampling_time  }}" readonly/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                      </div>
+                                    </div>
+							  </div>
+                                <div class="control-group">
+
+                                  <label class="control-label" for="sample_receiving_time">Specimen Collecting Time:</label>
+								<div class="controls">
+								    <div id="datetimepicker2" class="input-append date">
+                                        <input data-format="dd-MM-yyyy hh:mm:ss" type="text" name="sample_receiving_time" value="{{ data.sample_receiving_time  }}" readonly/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                      </div>
+                                    </div>
+							  </div>
+                             <div class="control-group">
+
+                                  <label class="control-label" for="releasing_time">Batch Release:</label>
+								<div class="controls">
+								    <div id="datetimepicker3" class="input-append date">
+                                        <input data-format="dd-MM-yyyy hh:mm:ss" type="text" name="releasing_time" value="{{ data.releasing_time  }}" readonly/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                      </div>
+                                    </div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="lab_test_number">Lab Test Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="lab_test_number" type="text" value="{{ data.lab_test_number }}" readonly>
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="sample_source">Specimen Origin </label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="sample_source" type="text" value="{{ data.sample_source }}" readonly>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="tank_number">Reservoir Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="tank_number" type="text" value="{{ data.tank_number }}" readonly>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="batch_quantity">Volume</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="batch_quantity" type="text" value="{{ data.batch_quantity }}" readonly >
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="formulation_no">Formulation No</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="formulation_number" type="text" value="{{ data.formulation_number }}" readonly  >
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="sample_type">Specimen Type</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="sample_type" type="text" value="{{ data.sample_type }}" readonly >
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="action">Action</label>
+								<div class="controls">
+								  <select name="permission_status" multiple data-rel="chosen">
+									<option>Approve</option>
+									<option>Reject</option>
+								  </select>
+								</div>
+							  </div>
+							  <div class="control-group hidden-phone">
+							  <label class="control-label" for="comments">Comments</label>
+							   <div class="controls">
+								<textarea class="input-xlarge focused" name="comments" rows="5"></textarea>
+							  </div>
+							</div>
+							  <div class="form-actions">
+								<button type="submit" class="btn btn-primary">Save changes</button>
+								<button class="btn">Cancel</button>
+							  </div>
+							</fieldset>
+						  </form>
+
+					</div>
+				</div>
+
+			</div>
+    
+{%endblock %}

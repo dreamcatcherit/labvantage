@@ -1,0 +1,55 @@
+{% extends "base/base.html" %}
+{% block title %}View Phone{% endblock %}
+{% block content %}
+            <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+        <li>
+    <a href="{% url 'view_customers' %}">View Customers</a>
+</li>
+
+</ul>
+    <div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><span class="break"></span>View Customer Contacts</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
+					 <div class="box-content">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+								  <th>Name</th>
+								  <th>Customer Representative </th>
+                                  <th>Phone</th>
+                                  <th>Phone Name</th>
+                                  <th>Phone</th>
+							  </tr>
+						  </thead>
+                            <tbody>
+
+                            {% for contact in contacts %}
+                            <tr>
+                            <td><a href="/inventory/view_customer/id/{{ contact.id }}">{{ contact.customer_name }}</a></td>
+                            <td><a href="/inventory/view_customer/id/{{ contact.id }}">{{ contact.customer_contacts_name }}</a></td>
+                            <td><a href="/inventory/view_customer/id/{{ contact.id }}">{{ contact.customer_contact }}</a></td>
+                            <td><a href="/inventory/view_customer/id/{{ contact.id }}">{{ contact.reference_contact_name }}</a></td>
+                            <td><a href="/inventory/view_customer/id/{{ contact.id }}">{{ contact.reference_contact }}</a></td>
+
+                            </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                            </table>
+                         </div>
+                    </div>
+    </div>
+{%endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+{% block title %}ADD NEW TEST {% endblock %}
+
+{% block content %}
+    <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+
+    <li>
+    <a href="{% url 'add_new_test' %}">New Test</a>
+</li>
+
+</ul>
+
+    <div class="well">
+        <h1 class="text-center"> NEW TEST </h1>
+         {% if messages %}
+            <div class="alert alert-info" role="alert">
+                <ul class="messages">
+                    {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+         {% endif %}
+    <form style="margin-left:35%; margin-top:50px" id="req-form" method="post" action= "{% url 'add_new_test' %}">{% csrf_token %}
+            <div class="control-group">
+                <label class="control-label" for="test_name">Test Name</label>
+                    <div class="controls">
+		                <input class="input-xlarge"  name="test_name" placeholder=""/>
+                    </div>
+            </div>
+
+
+            <div class="control-group">
+                <label class="control-label" for="user_id">Select Verifier:</label>
+                    <div class="controls">
+		                <select class="input-xlarge" name="username" data-rel="chosen">
+                                {% for verifier in verifiers %}
+                                <option value="{{verifier.username}}">{{ verifier.username }}</option>
+
+                                {% endfor %}
+                        </select>
+                    </div>
+            </div>
+
+      <button style="margin-left:50%" class="btn btn-primary" type="submit">Save</button>
+
+    </form>
+    </div>
+{% endblock %}

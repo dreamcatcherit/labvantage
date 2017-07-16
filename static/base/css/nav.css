@@ -1,0 +1,120 @@
+
+.nav,.nav ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+
+
+}
+
+.nav {
+    position:relative;
+    width: 100%;
+    height: 30px;
+    margin-left: 100px;
+
+
+
+
+}
+
+.nav ul {
+    height:0;
+    left:0;
+    overflow:hidden;
+    position:absolute;
+    top:46px;
+
+}
+
+.nav li {
+    float:left;
+    position:relative;
+}
+.nav li a {
+    -moz-transition:0.5s;
+    -o-transition:0.5s;
+    -webkit-transition:0.5s;
+    background: #2505A4;
+    border:1px solid #6E67A6;
+    color:#FFF;
+    display:block;
+    line-height:35px;
+    padding:5px 20px;
+    text-decoration:none;
+    transition:0.5s;
+    font-weight: bold;
+}
+
+.nav li:hover > a {
+    background: #33485f;
+    border-color:#6E67A6;
+    color:#fff;
+}
+
+.nav li:hover ul.subs {
+    height:auto;
+    width:180px;
+    background: #33485f;
+}
+
+.nav ul li {
+    -webkit-transition:0.5s;
+    opacity:0;
+    transition:0.5s;
+    width:100%;
+}
+
+.nav li ul li {
+    -moz-transition-delay:0s;
+    -o-transition-delay:0s;
+    -webkit-transition-delay:0s;
+    transition-delay:0s;
+}
+
+.nav li:hover ul li {
+    opacity:1;
+    -moz-transition-delay:0.5s;
+    -o-transition-delay:0.5s;
+    -webkit-transition-delay:0.5s;
+    transition-delay:0.5s;
+    background:#33485f;
+    
+}
+
+.nav ul li a {
+
+   background: #005eb8;
+   border-color:#6E67A6;
+   color:#fff;
+   line-height:1px;
+   -moz-transition:0.5s;
+   -o-transition:0.5s;
+   -webkit-transition:0.5s;
+   transition:0.5s;
+}
+
+.nav li:hover ul li a {
+    line-height:35px;
+}
+
+.nav ul li a:hover {
+
+   background: #005eb8;
+   background-image: -webkit-gradient(linear, 0% 0%, 0% 95%, from(rgba(255, 255, 255, 0.5)), to(rgba(255, 255, 255, 0)));
+   background-image: -moz-linear-gradient(90deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+   background-image: -o-linear-gradient(90deg, rgba(255,255,255,0.5),rgba(255,255,25,0));
+}
+.nav li:hover ul.subs {
+    height:auto;
+    width:180px;
+    background: #005eb8;
+}
+
+
+#menu{
+
+   background: #005eb8;
+   height: 50px;
+}
+

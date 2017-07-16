@@ -1,0 +1,182 @@
+
+*{
+  margin: 0px;
+  padding: 0px;
+}
+body{
+
+ background-color: #E6E6E6;
+
+
+}
+
+
+#main{
+  width: 800px;
+  
+  overflow: hidden;
+  display: block;
+  margin: 0 auto;
+
+
+  
+}
+
+
+
+h2{
+  margin: 0 15px 20px;
+ /* border-bottom: 2px solid $green-border;*/
+  padding: 5px 10px 5px 0;
+  font-size: 16px;
+  color: black;
+  margin-left: 230px;
+  padding-top: 10px;
+  font-weight: bold;
+
+
+}
+
+
+#heading{
+  display: -webkit-box;
+  -webkit-box-orient:horizontal;
+  margin-left: 352px;
+  padding-bottom: 10px;
+  height: 30px;
+  text-decoration: underline;
+  padding-top: 30px;
+
+
+}
+
+
+
+
+#container{
+  width: 900px;
+
+  margin-left: 200px;
+  padding-top: 50px;
+  margin-top: 10px;
+  display: -webkit-box;
+  -webkit-box-orient:horizontal;
+  text-align: center;
+  border:1px solid black;
+  float: middle;
+  padding: 30px;
+  padding-bottom: 5px;
+ background-color:#F2F2F2;
+
+}
+  
+
+
+  
+  label {
+    display: inline-block;
+    text-align: right;
+   /* margin: 10px;*/
+    font-weight: bold;
+
+    outline: 0;
+    font-size: 14px;
+    height: 5px;
+    width: 203px;
+    margin-top: 2px;
+    margin-left: 60px;
+    text-align: left;
+    clear: both;
+    float: left;
+    color: black;
+    font-weight: bolder;
+    padding-top: 10px;
+
+ }
+input[type=text], input[type=password],select,input[type=date],input[type=datetime-local]{
+    /*width: 65%; */
+    width: 203px;
+    font-family: "Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;
+   padding: 5px;
+    font-size: 0.9em;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.07);
+    color:black;
+    font-weight: bolder;
+
+  }
+
+  input[type=text]:focus, input[type=password]:focus{
+   background: #FFFFFF;
+
+ }
+ button{
+  
+   font-weight: bold;
+   color: black;
+
+   float: left;
+   /* padding: 15px 32px;*/
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   /* margin-left: 1000px;*/
+   border-radius:5px/5px;
+   font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, sans-serif;
+ margin-top:15px;
+ margin-bottom:15px;
+ outline:0;
+ cursor: pointer;
+ margin-left: 750px;
+ margin-bottom: 50px;
+ margin-top: 10px;
+ width: 100px;
+
+
+}
+ #box{
+      display: -webkit-box;
+      /* -webkit-box-orient:horizontal;*/
+      border: 1px solid black;
+      display:block;
+     
+      width: 800px;
+      margin: 30px;
+      padding: 30px;
+      height: 200px;
+     
+      margin-top: 90px;
+      padding-top: 70px;
+      margin-left: 30px;
+      
+       background-color:#F2F2F2;
+  
+     
+    }
+ 
+ textarea{
+ 
+ 
+    font-family: monospace;
+    border-color: rgb(169, 169, 169);
+    -webkit-appearance: textarea;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    -webkit-user-select: text;
+    flex-direction: column;
+    resize: auto;
+    cursor: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border-width: 1px;
+    border-style: solid;
+    border-color: initial;
+    border-image: initial;
+    margin-top: 10px;
+    padding: 2px;
+    width: 500px;
+    height: 170px;
+  }
+
+  

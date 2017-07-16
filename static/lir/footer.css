@@ -1,0 +1,20 @@
+#footer{
+	text-align: center;
+	padding: 5px;
+	 color: white;
+	  font-family: 'Lobster', cursive;
+	   font-size: 20px;
+	    font-weight: normal;
+	     line-height: 30px;
+	      /*margin: 0 0 18px;*/
+	      margin-top: 0px;
+	      text-shadow: 1px 0 0 #fff;
+	       background: #0A0966;
+	       border-top: 1px solid rgb(1,0,156);
+	      border-bottom: 1px solid rgb(1,0,156);
+           border-left: 1px solid rgb(1,0,156);
+           border-right: 1px solid rgb(1,0,156);
+           
+           
+
+ }

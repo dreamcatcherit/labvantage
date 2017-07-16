@@ -1,0 +1,77 @@
+
+#header{
+	/*padding: 20px;*/
+	width: 100%;
+	background: rgb(0,163,223);
+	height: 35px;
+	/*margin-bottom: 5px;*/
+	/*border: 2px solid white;*/
+	border: 2px solid rgb(2,41,191);
+}
+
+#header h1{
+	font-family:FontAwesome;
+    font-size: 20px;
+	text-align: left;
+	font-weight: bolder;
+	padding-top: 0px;
+	} 
+	
+h1{
+	/*padding-bottom: 2px;*/
+	color: white;
+	text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+} 
+
+label{
+ 	
+	font-size: 16px;
+	font-weight: bolder;
+	color:rgb(1,0,200);
+	height: 5px;
+	width: 150px;
+	margin-top: 5px;
+    /*margin-left: 8px;*/
+    text-align: left;
+    clear: both;
+    float: left;
+    font-weight: bold;
+} 
+
+
+input{
+
+height: 20px;
+width: 250px;
+border: 1px solid #000;
+font: 14px bolder Tahoma;
+font-weight: bolder;
+
+}
+#box{
+	
+	/*width: 100%;*/
+	/*height: 100%;*/
+	margin-left: 500px;
+	padding-bottom: 60px;
+	}
+button{
+	width: 10em; 
+	 height: 3em;
+	 margin-left: 400px;
+	 border-radius: 15px 50px;
+	 color: black;
+	 font-weight: bolder;
+	 background: rgb(78,145,253);
+	 border: 2px solid rgb(2,41,191);
+
+} 
+
+#content img{
+	margin-top: 30px;
+	margin-left: 20px;
+	margin-bottom: 30px;
+}
+
+
+ 

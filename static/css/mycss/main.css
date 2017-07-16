@@ -1,0 +1,32 @@
+    a.brand span{
+        color: white;
+        text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black;
+        font-weight: bold;
+    }
+
+
+ 
+#sidebar-left {
+     background:  #f05400;
+     border: 1px solid #a8afb3;
+     font-weight: bolder;
+     }
+footer {
+     background-color:  black;
+     text-align: center;
+     color: white;
+      font-family: 'Lobster', cursive;
+       font-size: 15px;
+        font-weight: bold;
+        text-shadow: 1px 0 0 #fff;
+}
+.box-header{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.login-box {
+    width: 500px;
+}
+

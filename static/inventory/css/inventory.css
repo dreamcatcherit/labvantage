@@ -1,0 +1,137 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+body{
+background: #959594;
+
+
+
+}
+
+
+#main{
+  width: 800px;
+  
+  overflow: hidden;
+  display: block;
+  margin: 0 auto;
+   width: 550px;
+
+  margin-left: 400px;
+  padding-top: 50px;
+  margin-top: 10px;
+  display: -webkit-box;
+  -webkit-box-orient:horizontal;
+  text-align: center;
+  border:1px solid black;
+  float: middle;
+  padding: 30px;
+  padding-bottom: 5px;
+
+
+
+  
+}
+
+
+
+h2{
+  margin: 0 15px 20px;
+ /* border-bottom: 2px solid $green-border;*/
+  padding: 5px 10px 5px 0;
+  font-size: 16px;
+  color: black;
+  margin-left: 280px;
+  padding-top: 50px;
+  font-weight: bold;
+
+
+}
+
+
+#heading{
+  display: -webkit-box;
+  -webkit-box-orient:horizontal;
+  margin-left: 352px;
+  padding-bottom: 10px;
+  height: 30px;
+  text-decoration: underline;
+  padding-top: 30px;
+
+
+}
+
+  
+
+
+  
+  label {
+     
+    text-align: right;
+   /* margin: 10px;*/
+    font-weight: bold;
+
+    /*outline: 0;*/
+    font-size: 14px;
+    height: 5px;
+    width: 203px;
+    margin-top: 2px;
+    margin-left: 60px;
+    text-align: left;
+    clear: both;
+    float: left;
+    color: black;
+    font-weight: bolder;
+    padding-top: 10px;
+
+ }
+input[type=text], input[type=password],select,input[type=date]{
+    /*width: 65%; */
+    width: 203px;
+    font-family: "Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;
+   padding: 5px;
+    font-size: 0.9em;
+   /* border-radius: 5px;*/
+    background: rgba(0, 0, 0, 0.07);
+    color:black;
+    font-weight: bolder;
+
+  }
+
+  input[type=text]:focus, input[type=password]:focus{
+   background: #FFFFFF;
+
+ }
+ #container{
+  width: 550px;
+
+  margin-left: 400px;
+  padding-top: 50px;
+  margin-top: 50px;
+  display: -webkit-box;
+  -webkit-box-orient:horizontal;
+  text-align: center;
+ /* border:1px solid black;*/
+  float: middle;
+  padding: 30px;
+  padding-bottom: 5px;
+ background-color:#F2F2F2;
+ height: 460px;
+
+}
+ button{
+  
+   font-weight: bold;
+   color: black;
+
+   float: right;
+     display: inline-block;
+     font-size: 16px;
+     width: 100px;
+   font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, sans-serif;
+ margin-top:15px;
+
+ }
+ 
+ 

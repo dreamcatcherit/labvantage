@@ -1,0 +1,287 @@
+{% extends "base/base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+<div class="row-fluid">
+			<form class="form-horizontal" action="/oap/view_oap_report/id/{{ oap_report.id }}/" method="post">{% csrf_token %}
+
+				<div class="box black span6 noMargin" style="margin:0">
+					<div class="box-header">
+						<h2><i class="halflings-icon white user"></i><span class="break"></span>Customer Details</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+									<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="customer_name">Name</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="customer_name" type="text" value="{{ customer.customer_name }}" readonly>
+								</div>
+								</div>
+								<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="customer_address">Address</label>
+								<div class="controls">
+								  <textarea cols="8" rows="4" class="input-xlarge focused" name="customer_address" readonly>{{ customer.customer_address}}</textarea>
+								</div>
+								</div>
+								<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="customer_contacts_name">Customer Representative </label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="customer_contacts_name" type="text" value="{{ customer.customer_contacts_name }}" readonly>
+								</div>
+								</div>
+								<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="customer_conatct">Phone</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="customer_conatact" type="text" value="{{ customer.customer_contact }}" readonly>
+								</div>
+								</div>
+								<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="reference_conatacts_name">Recipient</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="reference_contacts_name" type="text"  value="{{ customer.reference_contact_name }}" readonly>
+								</div>
+								</div>
+								<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="reference_conatct">Phone </label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="reference_conatact" type="text" value="{{ customer.reference_contact }}" readonly>
+								</div>
+								</div>
+
+
+					</div>
+				</div>
+
+				<div class="box black span6" onTablet="span6" onDesktop="span6">
+					<div class="box-header">
+						<h2><i class="halflings-icon white tasks"></i><span class="break"></span>Equipment Details</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<!-- <ul class="chat metro yellow"> -->
+						<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="equipment_number">Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="equipment_number" type="text" value="{{ equipment.equipment_number }}" readonly>
+								</div>
+								</div>
+								<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="equipemnt_model">Model</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="equipemnt_model" type="text" value="{{ equipment.equipment_model }}" readonly>
+								</div>
+								</div>
+								<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="component">Accessories</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="component" type="text" value="{{ equipment.component }}" readonly>
+								</div>
+								</div>
+
+						<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="component_make"> Accessories Manufacturer </label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="component_make" type="text" value="{{ equipment.component_make }}" readonly>
+								</div>
+								</div>
+
+								<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="component_model">Accessories Model</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="component_model" type="text" value="{{ equipment.component_model }}" readonly>
+								</div>
+								</div>
+
+								<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="serial_number">Serial Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="serial_number" type="text" value="{{ equipment.serial_number }}" readonly>
+								</div>
+								</div>
+								<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="lube_oil">Lubricant</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="lube_oil" type="text" value="{{ equipment.lube_oil }}" readonly>
+								</div>
+								</div>
+
+								<div class="control-group" style="color: black;font-weight: bold">
+								<label class="control-label" for="capacity">Capacity</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="capacity" type="text" value="{{ equipment.capacity }}" readonly>
+								</div>
+								</div>
+
+								</div>
+							</div>
+	<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title style="background: #0F6EB0;color: white">
+						<h2><i class=" halflings-icon white certificate"></i><span class="break"></span>EVALUATION(for current sample) </h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+				<table class="table table-condensed table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+								  <th>Progressive Analysis</th>
+								  <th>Current Sample</th>
+							  </tr>
+						  </thead>
+						  <tbody>
+							<tr>
+								<td>Date Sampled</td>
+								<td>
+                                    <input type="date" class="input-xlarge focused" name="date_sampled" value="{{ oap_report.progressive_analysis.date_sampled|date:'Y-m-d' }}" readonly>
+                                </td>
+								</tr>
+								<tr>
+								<td>Date Received</td>
+								<td><input type="date" class="input-xlarge focused" name="date_received" value="{{ oap_report.progressive_analysis.date_received|date:'Y-m-d' }}" readonly></td>
+								</tr>
+								<tr>
+								<td>Date Reported</td>
+								<td><input type="date" class="input-xlarge focused" name="date_reported" value="{{ oap_report.progressive_analysis.date_reported|date:'Y-m-d' }}" readonly></td>
+								</tr>
+								<tr>
+								<td>Lab Number</td>
+								<td><input class="input-xlarge focused" name="lab_number" type="text" value="{{ oap_report.progressive_analysis.lab_number }}" readonly></td>
+								</tr>
+								<tr>
+								<td>Oil Life(Hr)</td>
+								<td><input class="input-xlarge focused" name="oil_life" type="text" value="{{ oap_report.progressive_analysis.oil_life }}" readonly></td>
+								</tr>
+								<tr>
+								<td>Engine/Component Life(Hr)</td>
+								<td><input class="input-xlarge focused" name="component_life" type="text" value="{{ oap_report.progressive_analysis.component_life }}" readonly></td>
+								</tr>
+                          <tr>
+								<td>Filter Life(Hr)</td>
+								<td><input class="input-xlarge focused" name="filter_life" type="text" value="{{ oap_report.progressive_analysis.filter_life }}" readonly></td>
+								</tr>
+                          <tr>
+								<td>Daily Top up(Ltr)</td>
+								<td><input class="input-xlarge focused" name="daily_top_up" type="text" value="{{ oap_report.progressive_analysis.daily_top_up }}" readonly></td>
+								</tr>
+                          <tr>
+								<td>Sump Capacity(Ltr)</td>
+								<td><input class="input-xlarge focused" name="sump_capacity" type="text" value="{{ oap_report.progressive_analysis.sump_capacity }}" readonly></td>
+								</tr>
+                          <tr>
+								<td>Reservoir Temp. C</td>
+								<td><input class="input-xlarge focused" name="reservoir_temperature" type="text" value="{{ oap_report.progressive_analysis.reservoir_temperature }}" readonly></td>
+								</tr>
+                          <tr>
+								<td>Oil in, C</td>
+								<td><input class="input-xlarge focused" name="oil_in" type="text" value="{{ oap_report.progressive_analysis.oil_in}}" readonly></td>
+								</tr>
+                          <tr>
+								<td>Oil out, C</td>
+								<td><input class="input-xlarge focused" name="oil_out" type="text" value="{{ oap_report.progressive_analysis.oil_out}}" readonly></td>
+								</tr>
+                          <tr>
+								<td>Coolant in, C</td>
+								<td><input class="input-xlarge focused" name="coolant_in" type="text" value="{{ oap_report.progressive_analysis.coolant_in}}" readonly></td>
+								</tr>
+                          <tr>
+								<td>Coolant out, C</td>
+								<td><input class="input-xlarge focused" name="coolant_out" type="text" value="{{ oap_report.progressive_analysis.coolant_out}}" readonly></td>
+								</tr>
+                          <tr>
+								<td>Oil Changed?</td>
+								<td><input class="input-xlarge focused" name="oil_changed" type="text" value="{{ oap_report.progressive_analysis.oil_changed}}" readonly></td>
+								</tr>
+                          <tr>
+								<td>Date of Oil Renewed</td>
+								<td><input type="date" class="input-xlarge focused" name="date_of_oil_renewed" value="{{ oap_report.progressive_analysis.date_of_oil_renewed|date:'Y-m-d' }}" readonly></td>
+								</tr>
+								</tbody>
+
+								</table>
+
+								</div>
+								</div>
+								</div>
+
+							<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title style="background: #0F6EB0;color: white">
+						<h2><i class="halflings-icon white filter"></i><span class="break"></span>OIL ANALYSIS RESULTS </h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<table class="table table-condensed table-striped table-bordered bootstrap-datatable datatable">
+						  <tbody>
+                          {% for data in oatests %}
+							<tr>
+								<td>{{ data.test_name }}</td>
+								<td><input type="text" class="input-xlarge focused" name="oaresult" value="{{  data.result}}"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								</tr>
+                          {% endfor %}
+								</tbody>
+								</table>
+								</div>
+								</div>
+								</div>
+								<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title style="background: #0F6EB0;color: white">
+						<h2><i class="halflings-icon  white glass"></i><span class="break"></span>COMPOSITIONAL ANALYSIS</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+
+						  <tbody>
+                          {% for data in eatests %}
+							<tr>
+                                <td>{{ data.test_name }}</td>
+								<td><input type="text" class="input-xlarge focused" name="earesult" value="{{data.result}}"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								</tr>
+                          {% endfor %}
+								</tbody>
+								</table>
+
+
+								</div>
+								</div>
+								</div>
+								<div class="chat-form">
+								<label for="comment"><h2>LABORATORY REMARKS(for current sample)</h2></label>
+							<textarea name="comment" >{{ oap_report.comment }}</textarea>
+							{% if not oap_report.permission_status == 'Ver' %}
+                                    <button class="btn btn-info">Save Report</button>
+                                    {% endif %}
+						</div>
+                         </form>
+                         <h2>Standard test methods are used to test these Samples which truly represents the system.</h2>
+							</div>
+
+
+
+
+
+{%endblock %}

@@ -1,0 +1,168 @@
+{% extends "base/base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+        <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+          <li>
+    <a href="{% url 'view_released' %}">View Released Certificate</a>
+               <i class="icon-angle-right"></i>
+</li>
+        <li>
+    <a href="{% url 'view_released' report.id %}">{{ report.id }}</a>
+</li>
+</ul>
+
+    {% if initial %}
+    <div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon pencil"></i><span class="break"></span>Release Certificate</h2>
+
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" method="post" action="{% url 'release' %}"> {% csrf_token %}
+							<fieldset>
+							 <div class="control-group">
+								<label class="control-label" for="product_name">Product Name</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="product_name" type="text" value="{{ report.product_name }}" readonly>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="sample_source">Origin </label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="sample_source" type="text" value="{{ report.lab_request_form.sample_source }}" readonly>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="batch_number">Lot Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="batch_number" type="text" value = "{{ report.lab_request_form.batch_number }}" readonly>
+								</div>
+							  </div>
+                                 <div class="control-group">
+                                    <label class="control-label" for="sampling_time">Sampling Time:</label>
+                                    <div class="controls">
+                                        <div  class="input-append date">
+                                            <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="sampling_time" value="{{ report.lab_request_form.sampling_time|date:'Y-m-d' }} {{ report.lab_request_form.sampling_time|time:'g:i:s' }}">
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+							    <div class="control-group">
+								<label class="control-label" for="sample_tested">Specimen Tested and Met Requirements</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="sample_tested" type="text" >
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="filling_weight_calculations">Weight Calculations</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="filling_weight-calculations" type="text" >
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="head_of_qa">Head of QA/QC Lab</label>
+								<div class="controls">
+								  <input class="input-xlarge focused"  name = "head_of_qa" type="text" >
+								</div>
+							  </div>
+
+							  <div class="form-actions">
+								<button type="submit" class="btn btn-primary">Save</button>
+								<!-- <button class="btn">Cancel</button> -->
+							  </div>
+							</fieldset>
+						  </form>
+
+					</div>
+				</div>
+
+    {%else%}
+        {# view_release_certificate #}
+          <div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon pencil"></i><span class="break"></span>Released Certificate</h2>
+
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" method="post" action="{% url 'view_released' %}"> {% csrf_token %}
+							<fieldset>
+							 <div class="control-group">
+								<label class="control-label" for="product_name">Product Name</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="product_name" type="text" value="{{ report.product_name }}" readonly>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="sample_source">Origin </label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="sample_source" type="text" value="{{ report.sample_source }}" readonly>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="batch_number">Lot Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="batch_number" type="text" value = "{{ report.batch_number }}" readonly>
+								</div>
+							  </div>
+                                 <div class="control-group">
+                                    <label class="control-label" for="sampling_time">Sampling Time:</label>
+                                    <div class="controls">
+                                        <div  class="input-append date">
+                                            <input type="text" name="sampling_time" value="{{ report.sampling_time}}">
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+							    <div class="control-group">
+								<label class="control-label" for="sample_tested">Specimen Tested and Met Requirements</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="sample_tested" type="text" value="{{ report.sample_tested }}"readonly>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="filling_weight_calculations">Weight Calculations</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="filling_weight-calculations" type="text" value="{{ report.filling_weight_calculations }}" readonly>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="head_of_qa">Head of QA/QC Lab</label>
+								<div class="controls">
+								  <input class="input-xlarge focused"  name = "head_of_qa" type="text" value="{{report.head_of_qa}}" readonly>
+								</div>
+							  </div>
+                                 <div class="control-group">
+                                    <label class="control-label" for="date_signed">Date Signed:</label>
+                                    <div class="controls">
+                                        <div  class="input-append date">
+                                            <input type="text" name="date_signed" value="{{report.date_signed}}" readonly>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+							</fieldset>
+						  </form>
+
+					</div>
+				</div>
+
+    {% endif %}
+
+{%endblock %}

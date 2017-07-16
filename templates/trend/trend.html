@@ -1,0 +1,169 @@
+{% extends "base/base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+    <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+       <li>
+    <a href="{% url 'trend' %}">Trend Analysis Of Used Oil</a>
+
+</li>
+</ul>
+<div class="row-fluid" xmlns="http://www.w3.org/1999/html">
+
+						<div class="box ">
+							<div class="box-header">
+								<h2 style="font-weight: bold"><i class="halflings-icon list-alt"></i><span class="break"></span>Graphical Representation of OAP</h2>
+								<div class="box-icon">
+									<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+									<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+									<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+								</div>
+							</div>
+							<div class="box-content">
+                            <div class="row-fluid">
+                                <div class="row span6" style="border:1px solid grey">
+                                <form class="form-horizontal" style="margin-top:8px"  method="post">{% csrf_token %}
+                                <fieldset>
+                                    <div class="control-group noMargin">
+							<label class="control-label" for="customer" style="font-weight: bold">Filter By Company:</label>
+							<div class="controls">
+							<select class="input-xlarge" name="customer" data-rel="chosen">
+                                {% for customer in customers %}
+                                <option value="{{customer.id}}">{{ customer.customer_name }}</option>
+                                {% endfor %}
+                        </select>
+							</div>
+                                    </div>
+                                    <div class="control-group noMargin">
+							<label class="control-label" for="equipment" style="font-weight: bold">Select Equipment</label>
+							<div class="controls">
+							<select class="input-xlarge" name="equipment" data-rel="chosen">
+
+                                {% for equipment in equipments %}
+                                <option value="{{equipment.id}}">{{ equipment.equipment_model }}</option>
+                                {% endfor %}
+                        </select>
+							</div>
+						</div>
+                                <div class="control-group noMargin">
+							<label class="control-label" for="oatests" style="font-weight: bold">Choose tests:</label>
+							<div class="controls">
+							<select class="input-xlarge" name="oatests" multiple data-rel="chosen">
+
+                                {% for test in oatests %}
+                                <option value="{{test.test_name}}" selected>{{ test.test_name }}</option>
+                                {% endfor %}
+                        </select>
+							</div>
+						</div>
+                                <div class="offset6">
+                                    <button class="btn btn-mini btn-primary" name='oa_button' type="submit">Generate</button>
+                                    <a class="btn btn-mini btn-info" href="{% url 'trend' %}">Refresh</a>
+                                </div>
+                                </fieldset>
+                                </form>
+                                </div>
+                            <div class="row span6"><h3> Oil Analaysis Graphs:</h3>
+                            <canvas id="chart" height="25x" width="50%" ></canvas>
+                            </div>
+
+							</div>
+                            </div>
+						</div>
+						<div class="box">
+							<div class="box-header">
+								<h2 style="font-weight: bold"><i class="halflings-icon list-alt"></i><span class="break"></span>Graphical Represenation of Elemental Analysis</h2>
+								<div class="box-icon">
+									<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+									<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+									<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+								</div>
+							</div>
+<div class="box-content">
+                            <div class="row-fluid">
+                                <div class="row span6" style="border:1px solid grey">
+                                <form class="form-horizontal" method="post" style="margin-top:8px">{% csrf_token %}
+                                <fieldset>
+                                    <div class="control-group noMargin">
+							<label class="control-label" for="customer" style="font-weight: bold">Filter By Company:</label>
+							<div class="controls">
+							<select class="input-xlarge" name="customer" data-rel="chosen">
+                                {% for customer in customers %}
+                                <option value="{{customer.id}}">{{ customer.customer_name }}</option>
+                                {% endfor %}
+                        </select>
+							</div>
+                                    </div>
+                                    <div class="control-group noMargin">
+							<label class="control-label" for="equipment" style="font-weight: bold">Select Equipment</label>
+							<div class="controls">
+							<select class="input-xlarge" name="equipment" data-rel="chosen">
+
+                                {% for equipment in equipments %}
+                                <option value="{{equipment.id}}">{{ equipment.equipment_model }}</option>
+                                {% endfor %}
+                        </select>
+							</div>
+						</div>
+                                <div class="control-group noMargin">
+							<label class="control-label" for="eatests" style="font-weight: bold">Choose tests:</label>
+							<div class="controls">
+							<select class="input-xlarge" name="eatests" multiple data-rel="chosen">
+
+                                {% for test in eatests %}
+                                <option value="{{test.test_name}}" selected>{{ test.test_name }}</option>
+                                {% endfor %}
+                        </select>
+							</div>
+						</div>
+                                <div class="offset6">
+                                    <button class="btn btn-mini btn-primary" name='ea_button' type="submit">Generate</button>
+                                    <a class="btn btn-mini btn-info" href="{% url 'trend' %}">Refresh</a>
+                                </div>
+                                </fieldset>
+                                </form>
+                                </div>
+                            <div class="row span6"><h3> Elemental Analaysis Graphs:</h3>
+                            <canvas id="chart_ea" height="25x" width="50%" ></canvas>
+                            </div>
+
+							</div>
+                            </div>
+
+						</div>
+
+
+
+						</div>
+
+
+{%endblock %}
+
+{% block js %}
+ <script type="text/javascript">
+            var ctx = document.getElementById("chart").getContext('2d')
+            data = {{ chart_data|safe }}
+            if (data) {
+                new Chart(ctx).Line(data, {
+                    responsive: true,
+                    scaleShowGridLines: true,
+                    multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>",
+
+                })
+            }
+
+             var ctx2 = document.getElementById("chart_ea").getContext('2d')
+            data2 = {{ chart_data_ea|safe }}
+            new Chart(ctx2).Line(data2, {
+                responsive:true,
+                scaleShowGridLines : true,
+                multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>",
+
+            })
+
+        </script>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base/base.html" %}
+{% block title %}View Oil Analysis Tests{% endblock %}
+{% block content %}
+            <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+        <li>
+    <a href="{% url 'view_oap_tests' %}">View Oil Analysis Tests</a>
+</li>
+
+</ul>
+    <div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><span class="break"></span>View Oil Analysis Tests</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
+					 <div class="box-content">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+								  <th>Test Name</th>
+								  <th>Test Type</th>
+                                  <th>Assigned to</th>
+                                  <th>Added On</th>
+
+							  </tr>
+						  </thead>
+                            <tbody>
+
+                            {% for test in EATests %}
+                            <tr>
+                            <td>{{ test.test_name }}</td>
+                            <td>Elemental Analysis</td>
+                                <td>{{ test.user_id.username }}</td>
+                            <td>{{ test.added_on }}</td>
+
+
+                            </tr>
+                            {% endfor %}
+                            {% for test in OATests %}
+                            <tr>
+                            <td>{{ test.test_name }}</td>
+                            <td>Oil Analysis</td>
+                                <td> {{ test.user_id.username }}</td>
+                            <td>{{ test.added_on }}</td>
+
+                            </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                            </table>
+                         </div>
+                    </div>
+    </div>
+{%endblock %}

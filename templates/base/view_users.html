@@ -1,0 +1,61 @@
+{% extends "base/base.html" %}
+{% block title %}View Users{% endblock %}
+{% block content %}
+    <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+    <li>
+    <a href="{% url 'view_users' %}">View Users</a>
+
+</li>
+
+</ul>
+
+    <div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><span class="break"></span>View Users</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
+					 <div class="box-content">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+								  <th>Username</th>
+                                  <th>Type</th>
+								  <th>Last login</th>
+								  <th>Date Joined</th>
+
+							  </tr>
+						  </thead>
+                            <tbody>
+
+                            {% for user in users %}
+                            <tr>
+                            <td class="center">{{ user.username }}</td>
+                            <td class="center">{% if user.is_admin %}Admin{% endif %}
+                                {% if user.is_sampler %}Sampler{% endif %}
+                                {% if user.is_verifier %}Verifier{% endif %}
+                                {% if user.is_lab_manager %}Lab Manager{% endif %}
+                                {% if user.is_deputy_lab_manager %}Deputy Lab Manger{% endif %}
+                            </td>
+                            <td class="center">{{ user.last_login }}</td>
+                            <td class="center">{{ user.created_at}}</td>
+
+                            </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                            </table>
+                         </div>
+                    </div>
+    </div>
+{%endblock %}

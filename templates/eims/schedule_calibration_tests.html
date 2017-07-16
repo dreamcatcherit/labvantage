@@ -1,0 +1,78 @@
+{% extends "base/base.html" %}
+{% block title %}Schedule Tests{% endblock %}
+{% block content %}
+    <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+    <li>
+    <a href="{% url 'schedule_calibration_tests' %}">Schedule Tests</a>
+
+</li>
+
+</ul>
+
+    <div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><span class="break"></span>Schedule Yearly Calibration Tests for Equipments</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
+					 <div class="box-content">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+								  <th>Instrument Name</th>
+								  <th>Calibration Test Name</th>
+								  <th>Scheduled at</th>
+                                  <th> Interval</th>
+
+							  </tr>
+						  </thead>
+                            <tbody>
+
+                            {% for calibration in calibration_tests %}
+                            <tr>
+                            {% if no_calibration_scheduled %}
+                            <td><a href="{% url 'view_calibration_info' calibration.id %}">{{  calibration.instrument_info.instrument_name }}</a></td>
+                                {% else %}
+                                <td>{{  calibration.instrument_info.instrument_name }}</td>
+                                {% endif %}
+                            <td>{{  calibration.calibration_test_name }}</td>
+                            <td>{{  calibration.scheduled_at }}</td>
+                            <td>{{ calibration.interval }}</td>
+
+
+
+                            </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                            </table>
+                     {% if no_calibration_scheduled %}
+                     {% if calibration_tests.exists %}
+                     <form class="form-horizontal" method="post" action='{% url 'schedule_calibration_tests' %}'> {% csrf_token %}
+                            <button class="btn btn-large btn-block btn-success" type='submit' >Schedule Yearly Calibration Report Now</button>
+
+						</form>
+                     {% endif %}
+                         {% else %}
+                         <div class="alert-block">
+							<h2 class="text-center alert-heading">Calibration Scheduled!</h2>
+							<a class=" text-center btn-block btn-large btn-info" href="{% url 'view_calibration_tests' %}"> View Scheduled Calibration Tests</a>
+						</div>
+                     {% endif %}
+
+                         </div>
+                    </div>
+    </div>
+
+
+{%endblock %}

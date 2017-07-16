@@ -1,0 +1,39 @@
+{% extends "base/base.html" %}
+{% block title %}New Product{% endblock %}
+{% block content %}
+    <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+    <li>
+    <a href="{% url 'add_new_product' %}">New Product</a>
+
+</li>
+
+</ul>
+    <div class="well">
+    <h1 class="text-center">NEW PRODUCT </h1>
+        {% if messages %}
+            <div class="alert alert-info" role="alert">
+              <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        {% endif %}
+    <form class="form-horizontal" style="margin-left:25%; margin-top:50px" method="post" action= "{% url 'add_new_product' %}">{% csrf_token %}
+
+        <div class="control-group">
+        <label class="control-label" for="product_name">Product Name</label>
+            <div class="controls">
+		        <input class="input-xlarge"  name="product_name" placeholder="">
+            </div>
+        </div>
+
+      <button class="btn btn-primary" type="submit" style="margin-left:50%">Save</button>
+    </form>
+</div>
+{%endblock %}

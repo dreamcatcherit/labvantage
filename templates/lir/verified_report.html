@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Report</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'lir/report.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'lir/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'lir/nav.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'lir/footer.css' %}">
+
+
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<img src="{% static 'lir/img/img.jpg' %}">
+	</div>
+	<div id="menu">
+		<ul class="nav">
+			<li><a href="project.html">Home</a></li>
+			<li><a href="http://www.script-tutorials.com/">Inventory</a>
+				<ul class="subs">
+					<li><a href="#">Product Types</a></li>
+					<li><a href="#">Raw Materials</a></li>
+					<li><a href="#">Finished Product </a></li>
+					<li><a href="#">Used Oil</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Clients Info</a></li>
+			<li><a href="report.html">Finished Product Report</a></li>
+			<li><a href="oil.html">Oil Analysis</a></li>
+			<li><a href="#">Trend Analysis</a></li>
+			<li><a href="#">About us</a></li>
+
+			<li><a href="#">User Details</a>
+				<ul class="subs">
+					<li><a href="settings.html">Settings</a></li>
+					<li><a href="#">Log Out</a></li>
+				</ul>
+			</li>
+
+		</ul>
+	</div>
+
+	<div style="clear:both"></div>
+	<h1>Laboratory Pending Inspection Report</br><br><cite>(Finished Products)</cite></h1>
+	{% for test in test_info %}
+
+		<form  method="post" action="/lir/report_verify_save/{{ test.id }}/"> {% csrf_token %}
+			<input type="text" hidden value="{{ test.product_info.id }}" name="product_id">
+	
+	<section id="container">
+		<div id="kid1">
+
+			<div  id ="login">
+
+				<label for="product">Product Name: </label>
+
+
+				<select name="product_name" id="product_name"><br><br>
+					<option value="{{ test.product_info.product_name }}" selected>{{ test.product_info.product_name }}</option>
+				</select><br><br>
+
+				<label for="batch">Lot  Number:</label>
+				<input type="text" name="batch_number" value="{{ test.product_info.batch_number }}"/><br><br>
+				<label for="sample">Specimen Number:</label>
+				<input type="text" name="sample_number"  value="{{ test.product_info.sample_number }}"/><br><br>
+				<label for="test">Test Type    :</label>
+				<input type="text" name="test_type" value="{{ test.product_info.test_type }}" /><br><br>
+				<label for="test">Serial Number :</label>
+				<input type="text" name="serial_number" value="{{ test.product_info.serial_number }}"/><br><br>
+
+
+			</div>
+		</div>
+
+		<div id="kid2">
+		    <div id="login">
+				<label for="tank">Reservoir Number:</label>
+				<input type="text" name="tank_number" value="{{ test.product_info.tank_number }}" /><br><br>
+				<label for="batch">Lot Size,KL:</label>
+				<input type="text" name="batch_size" value="{{test.product_info.batch_size}}" /><br><br>
+				<label for="date">Date Tested:</label>
+				<input type="date" name="date_tested" value="{{ test.product_info.date_tested }}" /><br><br>
+				<label for="time_in">Time In/Date:</label>
+				<input type="date" name="time_in_date" value="{{ test.product_info.time_in_date }}" /><br><br>
+				<label for="time_out">Time Out/Date:</label>
+				<input type="date" name="time_out_date" value="{{ test.product_info.time_out_date }}" /><br><br>
+				<label for="blending">Date Tested:</label>
+				<input type="datetime-local" name="blending_date" value="{{ test.product_info.blending_date }}" /><br><br>
+			</div>
+
+		</div>
+	</section>
+	<h1> <span>Report</span></h1>
+
+	<table class="responstable">
+
+		<tr>
+			<th></th>
+			<th ><span>Test Name</span></th>
+			<th>Method</th>
+			<th>Unit</th>
+			<th>Min</th>
+			<th>Max</th>
+			<th>Typical</th>
+			<th>Result</th>
+			<th>Sign</th>
+		</tr>
+
+		<tr>
+			<td><input type="radio"/></td>
+			<td>{{ test.test_name }}"</td>
+			<td>{{ test.method }}"</td>
+			<td> {{ test.unit }}"</td>
+			<td> {{ test.mins}}"</td>
+			<td> {{ test.maxs }}</td>
+			<td> {{ test.typical }}</td>
+			<td><input	type="text" name="result" value="{{ test.result }}"></td>
+			<td></td>
+		</tr>
+
+	</table>
+
+	<button id="button" type="submit">Verify</button>
+	</form>
+	{% endfor %}
+
+	<div id="footer">
+		<p><cite>Copyright</cite> &copy 2016.All Rights Reserved</br>
+			Developed By RDS Solutions Ltd</p>
+	</div>
+
+</div>
+</body>
+</html>
+
+
+
+
+

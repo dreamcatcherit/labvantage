@@ -1,0 +1,84 @@
+{%extends 'base/base.html' %}
+{% block title %}ADD TEST INFO{% endblock %}
+
+{% block content %}
+<ul class="breadcrumb" style="font-weight:bold">
+    <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+<li>
+    <a href="{% url 'add_test_info' %}">Assign Test</a>
+</li>
+</ul>
+
+    <div class="well">
+        <h1 class="text-center"> ASSIGN TEST </h1>
+         {% if messages %}
+            <div class="alert alert-info" role="alert">
+                <ul class="messages">
+                    {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+         {% endif %}
+    <form class="form-horizontal" style="margin-left:25%; margin-top:20px" id="req-form" method="post" action= "{% url 'add_test_info' %}">{% csrf_token %}
+            <div class="control-group">
+                <label class="control-label" for="product_name">Product Name</label>
+                    <div class="controls">
+		                <select class="input-xlarge" name="product_name" data-rel="chosen">
+                                {% for product in products %}
+                                <option value="{{product.product_name}}">{{ product.product_name }}</option>
+
+                                {% endfor %}
+                        </select>
+                    </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="test_name">Test Name:</label>
+                    <div class="controls">
+		                <select class="input-xlarge"  name="test_name" data-rel="chosen">
+                                {% for test in tests %}
+                                <option value="{{test.test_name}}">{{ test.test_name }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="method">Method</label>
+                    <div class="controls">
+		                <input class="input-xlarge" name="method" placeholder="" required/>
+                    </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="unit">Unit</label>
+                    <div class="controls">
+		                <input class="input-xlarge" name="unit" placeholder="" required/>
+                    </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="mins">Min</label>
+                    <div class="controls">
+		                <input class="input-xlarge" type="number"  step="any" id="ati_mins" name="mins" placeholder="" required/>
+                    </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="maxs">Max</label>
+                    <div class="controls">
+		                <input class="input-xlarge" type="number" step="any" id="ati_maxs" name="maxs" placeholder="" required/>
+                    </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="typical">Typical</label>
+                    <div class="controls">
+		                <input type="number" id="ati_typical" step="any" class="input-xlarge" name="typical" placeholder="" required/>
+                    </div>
+            </div>
+
+            <button style="margin-left:50%" class="btn btn-large btn-primary" type="submit">Save</button>
+    </form>
+
+    </div>
+{% endblock %}

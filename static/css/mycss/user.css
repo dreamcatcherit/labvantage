@@ -1,0 +1,95 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+header,section,footer,aside,nav,article,hgroup{
+	display: block;
+}
+body{
+	width: 100%;
+	margin: 60px auto;
+	display: -webkit-box;
+	-webkit-box-pack:center;
+	background-image:url('../../images/img.jpg'); 
+}
+#big_wrapper{
+	max-width: 1000px;
+	margin: 20px 0px;
+	display: -webkit-box;
+	-webkit-box-flex:1;
+	-webkit-box-orient:vertical;
+}
+	
+form {
+  margin: 10px auto;
+  padding: 10px 20px;
+  background:rgb(34,127,245);
+  border-radius: 8px;
+  box-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  max-width: 450px;
+  }
+
+h1 {
+  margin: 0 0 30px 0;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+textarea,
+select {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  font-size: 16px;
+  height: auto;
+  margin: 0;
+  outline: 0;
+  padding: 15px;
+  width: 400px;
+  background-color: #e8eeef;
+  color: black;
+  font-weight: bold;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  margin-bottom: 30px;
+}
+
+
+button {
+  padding: 19px 39px 18px 39px;
+  background-color: rgb(33,101,186);
+  font-size: 18px;
+  text-align: center;
+  font-style: normal;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid rgb (171,138,197);
+  border-width: 1px 1px 3px;
+ box-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  margin-bottom: 10px;
+  color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+
+label {
+  display: block;
+  margin-bottom: 8px;
+   font-weight: bolder;
+  color: rgb(41,0,0);
+  color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue;
+  }
+
+
+ 
+  

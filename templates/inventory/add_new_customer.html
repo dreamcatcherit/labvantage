@@ -1,0 +1,91 @@
+{% extends "base/base.html" %}
+{% block title %}{% if view_contact %}VIEW{% else%}ADD NEW{% endif %} CUSTOMER{% endblock %}
+{% block content %}
+    <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+        {% if view_contact %}
+                <li>
+    <a href="{% url 'view_customers'%}">View Customers</a>
+    <i class="icon-angle-right"></i>
+
+    </li>
+             <li>
+    <a href="{% url 'view_customer' contact.id %}"> {{ contact.customer_name }}</a>
+
+    </li>
+
+        {% else%}
+             <li>
+    <a href="{% url 'add_new_customer' %}">Add New Customer</a>
+
+</li>
+
+        {% endif %}
+
+
+</ul>
+    <div class="well">
+    <h1 class="text-center"> {% if view_contact %}VIEW{% else%}ADD NEW{% endif %} CUSTOMER</h1><hr>
+        {% if messages %}
+            <div class="alert alert-info" role="alert">
+              <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        {% endif %}
+    <form class="form-horizontal" style="margin-left: 25%" method="post" action= "{% url 'add_new_customer' %}">{% csrf_token %}
+
+                <fieldset>
+
+							  <div class="control-group">
+								<label class="control-label" for="customer_name">Name</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="customer_name"  value="{{ contact.customer_name }}" {% if view_contact %}readonly{% endif %}>
+								</div>
+							  </div>
+							   <div class="control-group">
+                    <label class="control-label" for="customer_address">Address</label>
+                    <div class="controls">
+                        <input class="input-xlarge focused" name="customer_address"  value="{{ contact.customer_address }}" {% if view_contact %}readonly{% endif %}>
+                        </div>
+                        </div>
+							  <div class="control-group">
+								<label class="control-label" for="customer_contacts_name">Customer Representative </label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="customer_contacts_name"  value="{{ contact.customer_contacts_name }}" {% if view_contact %}readonly{% endif %}>
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="customer_contact">Phone</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="customer_contact"  value="{{ contact.customer_contact }}" {% if view_contact %}readonly{% endif %}>
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="reference_contact_name">Phone Name</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="reference_contact_name"  value = "{{ contact.reference_contact_name }}" {% if view_contact %}readonly{% endif %}>
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="reference_contact">Phone</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="reference_contact" value="{{ contact.reference_contact }}" {% if view_contact %}readonly{% endif %}>
+								</div>
+							  </div>
+                            {% if not view_contact %}
+
+								 <div class="control-group">
+								<button style="margin-left: 50%" type="submit" class="btn btn-primary">Save</button>
+							  </div>
+							{% endif%}
+                </fieldset>
+    </form>
+</div>
+{%endblock %}

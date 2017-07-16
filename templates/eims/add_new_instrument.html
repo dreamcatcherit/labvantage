@@ -1,0 +1,140 @@
+{% extends "base/base.html" %}
+{% block title %}ADD NEW INSTRUMENT{% endblock %}
+{% block content %}
+<ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+    <li>
+    <a href="{% url 'add_instrument' %}">New Instrument</a>
+
+</li>
+
+</ul>
+
+
+    <div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2 style="font-weight: bold"><i class="halflings-icon pushpin"></i><span class="break"></span>Instrument entry</h2>
+						<div class="box-icon">
+
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content" style="color:black; font-weight:bold">
+                        {% if messages %}
+            <div class="alert alert-info" role="alert">
+              <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        {% endif %}
+						<form enctype="multipart/form-data" class="form-horizontal" method="post" action='{% url 'add_instrument' %}'> {% csrf_token %}
+							<fieldset>
+                                <div class="box span6" style="border:0px">
+
+                                    <div class="control-group">
+				<label class="control-label" for="category_type">Category Type</label>
+								<div class="controls">
+								  <select name="category_type" data-rel="chosen">
+									<option value="I">Instrument</option>
+									<option value="E">Equipment</option>
+									<option value="MD">Measuring Device</option>
+								  </select>
+								</div>
+								</div>
+
+							  <div class="control-group">
+								<label class="control-label " for="model_number">Model Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="model_number" >
+								</div>
+							  </div>
+							   							  <div class="control-group">
+								<label class="control-label " for="supplier">Supplier</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="supplier" >
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="manufacturer">Manufacturer</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="manufacturer"  >
+								</div>
+							  </div>
+                                     <div class="control-group">
+								<label class="control-label" for="installation_date">Installation Date</label>
+								<div class="controls">
+								<input type="date" class="input-xlarge focused" name="installation_date" value="">
+                                </div>
+							  </div>
+                                    <div class="control-group">
+								<label class="control-label" for="po_date">P.O Date</label>
+								<div class="controls">
+								<input type="date" class="input-xlarge focused" name="po_date" value="">
+                                </div>
+							  </div>
+
+
+                                </div>
+                                <div class="box span6" style="border: 0px">
+
+
+
+
+							  <div class="control-group">
+								<label class="control-label" for="serial_number">Serial Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="serial_number"  >
+								</div>
+							  </div> <div class="control-group">
+								<label class="control-label" for="instrument_type">Instrument Name</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="instrument_name"  >
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="instrument_category">Instrument Category</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="instrument_category"  >
+								</div>
+							  </div>
+
+                                <div class="control-group">
+								<label class="control-label" for="received_date">Received Date</label>
+								<div class="controls">
+								<input type="date" class="input-xlarge focused" name="received_date" value="">
+                                </div>
+							  </div>
+
+
+                                <div class="control-group">
+								<label class="control-label" for="upload_file">Upload File</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="upload_file" type="file" >
+								</div>
+							  </div>
+</div>
+
+							  <button class="btn  btn-primary" type='submit' style="margin-left: 70%"><i class="halflings-icon white ok"></i> Submit</button>
+
+							 <button class="btn  btn-primary"><i class="halflings-icon white remove"></i> Close</button>
+
+
+						</fieldset>
+
+						</form>
+
+
+					</div>
+                    </div>
+    </div>
+
+
+    
+{%endblock %}

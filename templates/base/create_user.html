@@ -1,0 +1,67 @@
+{% extends "base/base.html" %}
+{% block title %}CREATE NEW USER{% endblock %}
+{% block content %}
+    <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+    <li>
+    <a href="{% url 'create_user' %}">Create New User</a>
+
+</li>
+
+</ul>
+
+    <div class="well">
+    <h1 class="text-center"> CREATE NEW USER </h1> <hr>
+         {% if messages %}
+    <div class="alert alert-info" role="alert">
+      <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <form class="form form-horizontal" style="margin-left: 20%" id="req-form" method="post" action= "{% url 'create_user' %}">{% csrf_token %}
+
+        <div class="control-group">
+        <label class="control-label" for="username">User:</label>
+            <div class="controls">
+		        <input class="input-xlarge"  name="username" placeholder="" required>
+            </div>
+        </div>
+        <div class="control-group">
+        <label class="control-label" for="password">Password:</label>
+            <div class="controls">
+		        <input class="input-xlarge" type="password" id="password" name="password" placeholder="" required>
+            </div>
+        </div>
+        <div class="control-group">
+        <label class="control-label" for="confirm_password">Confirm Password:</label>
+            <div class="controls">
+		        <input class="input-xlarge" type="password" id="confirm_password" name="confirm_password" placeholder="" required>
+                <div id="user_create_error_message"></div>
+            </div>
+        </div>
+        <div class="control-group">
+				<label class="control-label"  for="user_type">User Type:</label>
+								<div class="controls">
+								  <select id="product" name="user_type" data-rel="chosen">
+									<option value="S">Sampler</option>
+									<option value="V">Verifier</option>
+									<option value="DLM">Deputy Lab Manager</option>
+									<option value="LM">Lab Manager</option>
+
+								  </select>
+								</div>
+								</div>
+        <div>
+      <button class="btn btn-large btn-primary offset6" id="create_user" type="submit">Save User</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{%endblock %}

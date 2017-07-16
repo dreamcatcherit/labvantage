@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Report</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'lir/report.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'lir/header.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'lir/nav.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'lir/footer.css' %}">
+
+
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<img src="{% static 'lir/img/img.jpg' %}">
+	</div>
+	<div id="menu">
+		<ul class="nav">
+			<li><a href="project.html">Home</a></li>
+			<li><a href="http://www.script-tutorials.com/">Inventory</a>
+				<ul class="subs">
+					<li><a href="#">Product Types</a></li>
+					<li><a href="#">Raw Materials</a></li>
+					<li><a href="#">Finished Product </a></li>
+					<li><a href="#">Used Oil</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Clients Info</a></li>
+			<li><a href="report.html">Finished Product Report</a></li>
+			<li><a href="oil.html">Oil Analysis</a></li>
+			<li><a href="#">Trend Analysis</a></li>
+			<li><a href="#">About us</a></li>
+
+			<li><a href="#">User Details</a>
+				<ul class="subs">
+					<li><a href="settings.html">Settings</a></li>
+					<li><a href="#">Log Out</a></li>
+				</ul>
+			</li>
+
+		</ul>
+	</div>
+
+	<div style="clear:both"></div>
+	<h1>Laboratory Inspection Report</br><br><cite>(Finished Products)</cite></h1>
+
+
+	<section id="container">
+		<div id="kid1">
+
+			<form  id =" login" method="post" action="index.html">
+
+				<label for="product">Product Name: </label>
+
+
+				<select name="product_name" id="product_name"><br><br>
+					{% for product in product_name %}
+					<option value="{{ product.product_name }}">{{ product.product_name }}</option>
+					{% endfor %}
+				</select><br><br>
+
+				<label for="batch">Lot  Number:</label>
+				<input type="text" name="batch"  value="" /><br><br>
+				<label for="sample">Specimen Number:</label>
+				<input type="text" name="sample"  value="" /><br><br>
+				<label for="test">Test Type    :</label>
+				<select name="Test Type"><br><br>
+					<option value="test1">Test 1</option>
+					<option value="test2">Test 2</option>
+					<option value="test3">Test 3</option>
+					<option value="test4">Test 4</option>
+				</select><br><br>
+				<label for="test">Serial Number :</label>
+				<input type="text" name="serial"  value="" /><br><br>
+                
+
+
+			</form>
+		</div>
+
+		<div id="kid2">
+			<form  id =" login" method="post" action="index.html">
+				<label for="tank">Reservoir Number:</label>
+				<input type="text" name="tank"  value="" /><br><br>
+				<label for="batch">Lot Size,KL:</label>
+				<input type="text" name="batch"  value="" /><br><br>
+				<label for="date">Date Tested:</label>
+				<input type="date" name="date"  value="" /><br><br>
+				<label for="time_in">Time In/Date:</label>
+				<input type="date" name="time_in"  value="" /><br><br>
+				<label for="time_out">Time Out/Date:</label>
+				<input type="date" name="time_out"  value="" /><br><br>
+				<label for="blending">Date Tested:</label>
+				<input type="date" name="blending"  value="" /><br><br>
+
+			</form>
+		</div>
+	</section>
+	<!-- <div id="top_menu header">
+        <h1>Report</h1>
+    </div> -->
+
+	<!-- <section id="container">
+
+        <div id="top_menu">
+            <table style="width:100%">
+
+                <tr>
+                    <td>Test Name</td>
+                    <td>Method</td>
+                    <td>Unit</td>
+                    <td>Min</td>
+                    <td>Max</td>
+                    <td>Typical</td>
+                    <td>Result</td>
+                    <td>Sign</td>
+                </tr>
+            </table>
+        </div>
+    </section> -->
+
+
+	<!--for demo wrap-->
+	<!-- <h1>Fixed Table header</h1> -->
+	<!-- <table class="container">
+        <thead>
+            <tr>
+
+               <th><h1>Product Name</h1></th>
+                <th><h1>Lot  Number</h1></th>
+                <th><h1>Specimen Number</h1></th>
+                <th><h1>Test Type</h1></th>
+                <th><h1>Serial Number</h1></th>
+                <th><h1>Reservoir Number</h1></th>
+                <th><h1>Lot Size,KL</h1></th>
+                <th><h1>Date Tested</h1></th>
+                <th><h1>Time In/Date</h1></th>
+                <th><h1>Time Out/Date</h1></th>
+                <th><h1>>Date Tested</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+     -->
+
+
+
+
+
+	<script src="{% static 'lir/js/jquery-3.1.1.min.js' %}"></script>
+	<script src="{% static 'lir/js/detect_product_select.js' %}"></script>
+
+	<div id="footer">
+		<p><cite>Copyright</cite> &copy 2016.All Rights Reserved</br>
+			Developed By RDS Solutions Ltd</p>
+	</div>
+
+</div>
+</body>
+</html>
+
+
+
+
+

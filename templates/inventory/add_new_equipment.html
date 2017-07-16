@@ -1,0 +1,124 @@
+{% extends "base/base.html" %}
+{% block title %}{% if view_equipment %}VIEW{% else%}ADD NEW{% endif %} EQUIPMENT{% endblock %}
+{% block content %}
+
+        <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+        {% if view_equipment %}
+                <li>
+    <a href="{% url 'view_equipments' %}">View Equipments</a>
+    <i class="icon-angle-right"></i>
+
+    </li>
+             <li>
+    <a href="{% url 'view_equipment' equipment.id %}"> {{ equipment.equipment_model }}</a>
+
+    </li>
+
+        {% else%}
+             <li>
+    <a href="{% url 'add_new_equipment' %}">Add New Equipment</a>
+
+</li>
+
+        {% endif %}
+
+
+</ul>
+
+    <div class="well">
+    <h1 class="text-center"> {% if view_equipment %}VIEW{% else%}ADD NEW{% endif %} EQUIPMENT </h1>
+        {% if messages %}
+            <div class="alert alert-info" role="alert">
+              <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        {% endif %}
+    <form style="margin-top:4%" class='form-horizontal offset3' method="post" action= "{% url 'add_new_equipment' %}">{% csrf_token %}
+
+                <fieldset>
+
+							  <div class="control-group">
+								<label class="control-label" for="equipment_number">Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="equipment_number"  value="{{ equipment.equipment_number }}" {% if view_equipment %}readonly{% endif %}>
+								</div>
+							  </div>
+							   <div class="control-group">
+                    <label class="control-label" for="equipment_model">Model</label>
+                    <div class="controls">
+                        <input class="input-xlarge focused" name="equipment_model"  value="{{ equipment.equipment_model }}" {% if view_equipment %}readonly{% endif %}>
+                        </div>
+                        </div>
+                <div class="control-group">
+                    <label class="control-label" for="equipment_make">Equipment Make</label>
+                    <div class="controls">
+                        <input class="input-xlarge focused" name="equipment_make"  value="{{ equipment.equipment_make }}" {% if view_equipment %}readonly{% endif %}>
+                        </div>
+                        </div>
+							  <div class="control-group">
+								<label class="control-label" for="component">Accessories</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="component"  value="{{ equipment.component }}" {% if view_equipment %}readonly{% endif %}>
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="component_make"> Accessories Manufacturer </label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="component_make"  value="{{ equipment.component_make }}" {% if view_equipment %}readonly{% endif %}>
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="component_model">Accessories Model</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="component_model"  value = "{{ equipment.component_model }}" {% if view_equipment %}readonly{% endif %}>
+								</div>
+							  </div>
+							   <div class="control-group">
+								<label class="control-label" for="serial_number">Serial Number</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="serial_number"  value="{{ equipment.serial_number }}" {% if view_equipment %}readonly{% endif %}>
+								</div>
+							  </div>
+                                {% if view_equipment %}
+							   <div class="control-group">
+								<label class="control-label" for="lube_oil">Lubricant</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="lube_oil"  value="{{ equipment.lube_oil.product_name }}" readonly>
+								</div>
+							  </div>
+                {% else %}
+                                       <div class="control-group">
+                <label class="control-label" for="lube_oil">Lubricant</label>
+                    <div class="controls">
+		                <select class="input-xlarge"  name="lube_oil" data-rel="chosen">
+                                {% for product in products %}
+                                <option value="{{product.product_name}}">{{ product.product_name }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+            </div>
+                {% endif %}
+
+							   <div class="control-group">
+								<label class="control-label" for="capacity">Capacity</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="capacity"  value="{{ equipment.capacity }}" {% if view_equipment %}readonly{% endif %}>
+								</div>
+							  </div>
+                            {% if not view_equipment %}
+								 <div class="">
+								<button type="submit" class="btn btn-primary offset6">Save </button>
+							  </div>
+							{% endif%}
+                </fieldset>
+    </form>
+</div>
+{%endblock %}

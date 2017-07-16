@@ -1,0 +1,86 @@
+{% extends "base/base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+    <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+
+       <li>
+    <a href="{% url 'create_new_oap' %}">Create New OAP Report</a>
+
+</li>
+</ul>
+    <div class="box span8 offset2">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span>Generate OAP Report</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
+    <div class="box-content">
+						<form class="form-horizontal" action="{% url 'create_new_oap' %}" method="post">{% csrf_token %}
+							<fieldset>
+                                 <div class="control-group ">
+				                    <label class="control-label" for="customer_name">Select Customer</label>
+								        <div class="controls">
+								                <select name="customer_name" data-rel="chosen">
+                                                {% for customer in customers %}
+                                                        <option value="{{ customer.customer_name }}">{{ customer.customer_name }}</option>
+                                                {% endfor %}
+                                              </select>
+                                         <a  href="{% url 'add_new_customer' %}" target="_blank"><span class="halflings-icon plus-sign"></span></a>
+								        </div>
+                              </div>
+
+                                 <div class="control-group ">
+				                    <label class="control-label" for="equipment_number">Select Equipment</label>
+								        <div class="controls">
+								                <select name="equipment_number" data-rel="chosen">
+                                                {% for equipment in equipments %}
+                                                        <option value="{{ equipment.equipment_number }}">{{ equipment.equipment_number}}-{{ equipment.equipment_model }}</option>
+                                                {% endfor %}
+                                              </select>
+                                         <a  href="{% url 'add_new_equipment' %}" target="_blank"><span class="halflings-icon plus-sign"></span></a>
+								        </div>
+                              </div>
+                             <div class="control-group ">
+				                    <label class="control-label" for="oil_analysis_tests">Oil Analysis tests</label>
+								        <div class="controls">
+                                            <select name="oil_analysis_tests" multiple data-rel="chosen">
+                                                {% for test in oatests %}
+                                            <option value="{{ test.test_name }}" selected>{{ test.test_name }}</option>
+                                                {% endfor %}
+
+                                        </select>
+                                        </div>
+
+                                 </div>
+                            <div class="control-group ">
+				                    <label class="control-label" for="elemental_analysis_tests">Elemental Analysis tests</label>
+								        <div class="controls">
+                                            <select name="elemental_analysis_tests" multiple data-rel="chosen">
+                                            {% for test in eatests %}
+                                            <option value="{{ test.test_name }}" selected>{{ test.test_name }}</option>
+                                                {% endfor %}
+                                        </select>
+                                        </div>
+
+                                 </div>
+
+
+                            <div class="form-actions">
+								<button type="submit" class="btn btn-primary">Save changes</button>
+								<button class="btn" onclick="javascript:history.back()">Cancel</button>
+							  </div>
+							</fieldset>
+						  </form>
+
+    </div>
+
+    </div>
+{%endblock %}

@@ -1,0 +1,100 @@
+{% extends "base/base.html" %}
+{% block title %}ADD CALIBRATION INFO{% endblock %}
+{% block content %}
+    <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+    <li>
+    <a href="{% url 'add_calibration_info' %}">Add Calibration Info</a>
+
+</li>
+
+</ul>
+
+    <div class="row-fluid sortable">
+				<div class="box span8" style="margin-left: 16.8%; border:1px solid black; margin-top:50px;">
+					<div class="box-header" data-original-title>
+						<h2 style="font-weight: bold;color: black"> <i class="halflings-icon tags"></i><span class="break" ></span>Calibration Details</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content" style="margin-left:15%; color:black; font-weight:bold">
+                         {% if messages %}
+            <div class="alert alert-info" role="alert">
+              <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        {% endif %}
+						<form class="form-horizontal" method="post" action="{% url 'add_calibration_info' %}"> {% csrf_token %}
+							<fieldset>
+
+							  	<div class="control-group" style="margin-top:10px">
+				<label class="control-label" for="select_instrument">Select Instrument</label>
+								<div class="controls">
+								  <select name="select_instrument" data-rel="chosen">
+                                      {% for instrument in instruments %}
+									<option value="{{ instrument.instrument_name }}">{{ instrument.instrument_name }}</option>
+									{% endfor %}
+								  </select>
+								</div>
+								</div>
+
+							   <div class="control-group">
+								<label class="control-label" for="calibration_test_name">Calibration Test Name</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="calibration_test_name" >
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="scheduled_at">Scheduled At</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="scheduled_at" type="date" required>
+								</div>
+							  </div>
+                                <div class="control-group">
+								<label class="control-label" for="interval">Interval</label>
+								<div class="controls">
+                                    <div class="input-append"><input class="input-xlarge focused" name="interval" type="number:focus"><span class="add-on"> month(s)</span></div>
+
+								</div>
+							  </div>
+
+							   <div class="control-group">
+								<label class="control-label" for="gross_day">Gross Day</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="gross_day" type="number:focus">
+								</div>
+							  </div>
+{#							  <div class="control-group">#}
+{#				<label class="control-label" for="select_instrument">Status</label>#}
+{#								<div class="controls">#}
+{#								  <select name="status" data-rel="chosen">#}
+{#									<option>Complete</option>#}
+{#									<option>Incomplete</option>#}
+{##}
+{#								  </select>#}
+{#								</div>#}
+{#								</div>#}
+							</fieldset>
+
+								<button class="btn  btn-primary " style="margin-left:70%"><i class="halflings-icon white ok"></i> Submit</button>
+
+							 <button class="btn  btn-primary"><i class="halflings-icon white remove"></i> Close</button>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+
+    
+{%endblock %}

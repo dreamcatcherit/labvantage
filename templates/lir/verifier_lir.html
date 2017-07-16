@@ -1,0 +1,182 @@
+{% extends "base/base.html" %}
+{% block title %}Generate New Lab Inspection Report{% endblock %}
+{% block content %}
+     <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+          <li>
+    <i class="icon-home"></i>
+    <a href="{% url 'view lir' %}">View LIR</a>
+    <i class="icon-angle-right"></i>
+</li>
+        <li>
+    <a href="#"> {{ lir.id }}</a>
+</li>
+
+</ul>
+
+    <div class="row-fluid sortable">
+        {% if messages %}
+            <div class="alert alert-info" role="alert">
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+
+
+        <div class="box span12">
+            <div class="box-header" data-original-title>
+                <h2><!-- <i class="halflings-icon edit"></i> --><span class="break"></span>Lab Inspection Report</h2>
+                <div class="box-icon">
+                    <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+                </div>
+            </div>
+            <div class="box-content">
+                <form class="form-horizontal" action="/lir/report_verify_save/" method="post">{% csrf_token %}
+                    <fieldset>
+
+                            <div class="control-group">
+                                <label class="control-label" for="product_name">Product Name</label>
+                                <div class="controls">
+                                    <input type="text" class="input-xlarge focused" readonly value="{{ lir.lab_request_form.product_name.product_name }}">
+                                </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <label class="control-label" for="batch_number">Lot  Number</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="batch_number" type="text" readonly value="{{ lir.lab_request_form.batch_number }}">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="sample_number">Specimen Number</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="sample_number" type="text" readonly value="{{ lir.sample_number }}" >
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="test_type">Test Type</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="test_type" type="text" readonly value="{{ lir.test_type }}">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="serial_number">Serial Number</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="serial_number" type="text" readonly value="{{ lir.serial_number }}">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="tank_number">Reservoir Number</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="tank_number" type="text" readonly value="{{ lir.tank_number }}">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="batch_size">Lot Size</label>
+                                <div class="controls">
+                                    <input class="input-xlarge focused" name="batch_size" type="text" readonly value="{{ lir.batch_size }}">
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="blending_date">Date Tested:</label>
+                                <div class="controls">
+                                    <div id="datetimepicker1" class="input-append date">
+                                        <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="blending_date" readonly value="{{ lir.blending_date|date:'Y-m-d' }} {{ lir.blending_date|time:"g:i:s" }}" />
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+
+                                <label class="control-label" for="time_in_date">Time In Date:</label>
+                                <div class="controls">
+                                    <div id="datetimepicker2" class="input-append date">
+                                        <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="time_in_date" readonly value="{{ lir.time_in_date|date:'Y-m-d' }} {{ lir.time_in_date|time:"g:i:s" }}"/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+
+                                <label class="control-label" for="time_out_date">Time Out Date:</label>
+                                <div class="controls">
+                                    <div id="datetimepicker3" class="input-append date">
+                                        <input data-format="yyyy-MM-dd hh:mm:ss" type="text" name="time_out_date" readonly value="{{ lir.time_out_date|date:'Y-m-d' }} {{ lir.time_out_date|time:"g:i:s" }}"/>
+                                        <span class="add-on">
+                                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                          </i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Test name</th>
+                                <th>Method</th>
+                                <th>Unit</th>
+                                <th>Min</th>
+                                <th>Max</th>
+                                <th>Typical</th>
+                                <th>Result</th>
+                                <th>Sign</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for test in test_info %}
+
+                                <tr>
+
+                                    <td>{{ test.test_name }}</td>
+                                    <td>{{ test.method }}</td>
+                                    <td>{{ test.unit }}</td>
+                                    <td>{{ test.mins}}</td>
+                                    <td>{{ test.maxs }}</td>
+                                    <td>{{ test.typical }}</td>
+                                    {% if test.result %}
+                                        <td>{{ test.result }}</td>
+                                    {% else %}
+                                        <input type="hidden" name="table_id" value="{{ test.id }}" >
+                                        <td class="">
+                                            <input class="input-small" type="number" step="any" name="table_result"/>
+                                        </td>
+                                    {% endif %}
+                                    {% if test.sign %}
+                                        <td>{{ test.sign }}</td>
+                                    {% else %}
+                                        <td></td>
+                                    {% endif %}
+                                </tr>
+
+
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="control-group">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{%endblock %}

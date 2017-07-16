@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Initial Form</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'lir/initial.css' %}">
+</head>
+<body>
+<div class="main">
+  <a href="/lir/sampler_pending_list/">List of all pending data</a>
+  <a href="/lir/sampler_approved_list/">List of all approved data</a>
+  <div id="heading"><h2>LAB TEST REQUEST FORM</h2></div>
+  <div id="container">
+    {% if messages %}
+    <div class="alert alert-info" role="alert">
+      <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <form action="/lir/sampler/" method="post"> {% csrf_token %}
+      <div>
+        <label for="batch">Lab No</label>
+        <input type="text" name="ref_no" placeholder=""/><br><br>
+      </div>
+      <div>
+        <label for="duration">Date</label>
+        <input type="date" name="date"  placeholder="" /><br><br>
+      </div>
+      <div>
+
+        <label for="product">Product Name </label>
+        <!-- <input type="text" id="product"  placeholder="">
+      -->
+        <select name="product_name"><br><br>
+          {% for product in product_name %}
+          <option value="{{ product.product_name }}">{{ product.product_name }}</option>
+          {% endfor %}
+        </select><br><br>
+
+      </div>
+
+      <div>
+        <label for="batch">Lot  Number</label>
+        <input type="text" name="batch_number" placeholder=""/><br><br>
+      </div>
+      <div>
+        <label for="s_time">Sampling Time</label>
+        <input type="date" name="sampling_time" /><br><br>
+
+      </div>
+      <div>
+        <label for="lab_test">Lab Test No</label>
+        <input type="text" name="lab_test_number"  placeholder="" /><br><br>
+      </div>
+      <div>
+
+        <label for="s_time">Specimen Collecting Time</label>
+        <input type="date" name="sample_receiving_time"  placeholder="" /><br><br>
+      </div>
+      <div>
+        <label for="s_src">Specimen Origin </label>
+        <input type="text" name="sample_source"  placeholder="" /><br><br>
+      </div>
+      <!-- </div> -->
+      <!-- 
+      <div id="side_bar"> -->
+      <div>
+        <label for="tank_no">Tank No</label>
+        <input type="text" name="tank_number" placeholder=""/><br><br>
+      </div>
+      <div>
+        <label for="quantity">Volume</label>
+        <input type="text" name="batch_quantity" placeholder=""/><br><br>
+      </div>
+      <div>
+
+
+        <label for="r_time">Batch Release</label>
+        <input type="date" name="releasing_time"  placeholder="" /><br><br>
+      </div>
+      <div>
+        <label for="f_no">Formulation No</label>
+        <input type="text" name="formulation_number" placeholder=""/><br><br>
+      </div>
+      <div>
+        <label for="s_type">Specimen Type</label>
+        <input type="text" name="sample_type" placeholder=""/><br><br>
+      </div>
+      <!--  </div> -->
+        <div><button class="submit-btn" type="submit">Save</button></div>
+    </form>
+  </div>
+  <!-- <button class="left waves-effect btn-flat brand-text submit-btn" type="submit">Save</button> -->
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{% extends "base/base.html" %}
+{% block title %}ADD NEW OIL ANALYSIS TEST {% endblock %}
+{% block content %}
+    <ul class="breadcrumb" style="font-weight:bold">
+<li>
+    <i class="icon-home"></i>
+    <a href="{% url 'home' %}">Home</a>
+    <i class="icon-angle-right"></i>
+</li>
+
+       <li>
+    <a href="{% url 'add_new_oap_test'%}">Add New Oil Analysis Test</a>
+
+</li>
+</ul>
+    <div class="well">
+    <h1 class="text-center"> ADD NEW OIL ANALYSIS TEST</h1><hr>
+        {% if messages %}
+            <div class="alert alert-info" role="alert">
+              <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        {% endif %}
+    <form class="form-horizontal" style="margin-left: 25%" method="post" action= "{% url 'add_new_oap_test' %}">{% csrf_token %}
+
+                <fieldset>
+                    <div class="control-group">
+								<label class="control-label" for="test_name">Test Name:</label>
+								<div class="controls">
+								  <input class="input-xlarge focused" name="test_name" type="text" value="" >
+								</div>
+							  </div>
+
+                    <div class="control-group">
+                <label class="control-label" for="test_type">Choose Type:</label>
+                    <div class="controls">
+		                <select class="input-xlarge" name="test_type" data-rel="chosen">
+                                <option value="EA">Elemental Analysis</option>
+                                <option value="OA">Oil Analysis</option>
+                        </select>
+                    </div>
+                    </div>
+                        <div class="control-group">
+                <label class="control-label" for="user">Assigned to:</label>
+                    <div class="controls">
+		                <select class="input-xlarge"  name="user_id" data-rel="chosen">
+                            {% for user in testers %}
+                            <option value="{{user.id}}">{{ user.username }}</option>
+                             {% endfor %}
+                        </select>
+                    </div>
+            </div>
+
+
+								 <div class="control-group">
+								<button style="margin-left: 50%" type="submit" class="btn btn-primary">Add</button>
+							  </div>
+
+                </fieldset>
+    </form>
+</div>
+{%endblock%}
