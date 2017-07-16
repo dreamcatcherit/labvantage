@@ -1,4 +1,4 @@
-![LABvantage](/labvantage/blob/master/static/img/labvantage.png)
+![LABvantage](/static/img/labvantage.png)
 LABvantage
 ==========
 
