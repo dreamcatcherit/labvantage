@@ -15,14 +15,14 @@ INSTALLATION
 
 LICENSE
 ============  
-    See LICENSE file.
+ See [LICENSE](/LICENSE) file.
 
 CONTRIBUTORS LISTS:
 ===================  
 Special thanks to all our contributors.
 
- * Naurin Idris 
- * Wasi Mohammed Abdullah
+ * [Naurin Idris](https://github.com/naurin002) 
+ * [Wasi Mohammed Abdullah](https://github.com/wasi0013)
  * Ashutosh Das 
 
-
+Get Labvantage Commercial Support from [Dreamcatcher IT](https://wwww.dreamcatcherit.com) by dropping an e-mail: [info@dreamcatcherit.com](mailto:info@dreamcatcherit.com)
