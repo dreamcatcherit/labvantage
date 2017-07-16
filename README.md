@@ -1,3 +1,4 @@
+![LABvantage](labvantage/static/img/labvantage.png)
 LABvantage
 ==========
 
