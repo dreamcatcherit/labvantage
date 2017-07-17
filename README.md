@@ -1,6 +1,7 @@
 <img src="/static/img/labvantage.png" height="21%" width="21%" alt="LABvantage">
 
-LABvantage software allows you to effectively manage samples and associated data to improve lab efficiency. It allows laboratories to trace and track all samples or specimens that are received into the laboratory, tests performed, their results, any changes to results etc. By using LABvantage your lab can automate workflows, integrate instruments, and manage samples and associated information. It enables laboratories to move towards paperless office. It has the ability to be customized and and implemented in any sized Testing Laboratory environments.
+LABvantage software allows you to effectively manage samples and associated data to improve lab efficiency. It allows laboratories to trace and track all samples or specimens that are received into the laboratory, tests performed, their results, any changes to results etc. By using LABvantage your lab can automate workflows, integrate instruments, and manage samples and associated information. It enables laboratories to move towards paperless office. It has the ability to be customized and and implemented in any sized Testing Laboratory environments.  
+**Features:** https://goo.gl/jBKKzp
 
 INSTALLATION 
 ============  
